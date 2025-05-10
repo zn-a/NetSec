@@ -90,12 +90,12 @@ def main():
         sys.exit(1)
 
     print(f"[+] Attacker MAC: {attacker_mac}")
-    print(f"[+] Victim 1: {victim1_ip} → {victim1_mac}")
-    print(f"[+] Victim 2: {victim2_ip} → {victim2_mac}")
+    print(f"[+] Victim 1: {victim1_ip} (IP), {victim1_mac} (MAC)")
+    print(f"[+] Victim 2: {victim2_ip} (IP), {victim2_mac} (MAC)")
 
     # Handle Ctrl+C interrupt
     def handle_exit(sig, frame):
-        print("\n[!] Ctrl+C received. Cleaning up...")
+        print("\n[!] Ctrl+C received. Stopping ARP spoofing...")
 
         # Restore ARP tables
         restore_arp()
