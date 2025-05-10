@@ -11,6 +11,7 @@ RESET = "\033[0m"
 
 
 def main():
+    # Check for correct usage
     if len(sys.argv) != 4:
         print(f"{RED}Error: Incorrect Usage!{RESET}")
         print(
