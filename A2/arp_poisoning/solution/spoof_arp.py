@@ -144,11 +144,6 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
     signal.signal(signal.SIGTERM, signal_handler)  # Termination signal
 
-    # Check for root privileges (necessary for raw sockets and IP forwarding)
-    if os.geteuid() != 0:
-        print("[!] This script requires root privileges to run.")
-        sys.exit(1)
-
     # Check command line arguments
     if len(sys.argv) != 3:
         print("Error: Incorrect Usage!")
