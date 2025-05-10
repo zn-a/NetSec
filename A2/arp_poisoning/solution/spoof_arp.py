@@ -147,7 +147,7 @@ def main():
     # Check command line arguments
     if len(sys.argv) != 3:
         print("Error: Incorrect Usage!")
-        print(f"Usage: python3 {sys.argv[0]} <victim1_ip> <victim2_ip>")
+        print(f"Usage: python3 spoof_arp.py <victim1_ip> <victim2_ip>")
         sys.exit(1)
 
     victim1_ip_global = sys.argv[1]
