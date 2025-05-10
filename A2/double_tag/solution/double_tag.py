@@ -26,8 +26,9 @@ def main():
     eth_src = get_if_hwaddr(ATTACKER_INTERFACE)
 
     print(
-        f"{BLUE}Sending double-tagged ICMP packet to {destination_ip} via VLANs {outer_vlan}, {inner_vlan}{RESET}")
+        f"{BLUE}Sending double tagged ICMP packet to {destination_ip} via VLANs {outer_vlan}, {inner_vlan}{RESET}")
 
+    # Build the double tagged packet
     packet = (
         Ether(src=eth_src, dst="ff:ff:ff:ff:ff:ff") /
         Dot1Q(vlan=outer_vlan) /
