@@ -41,7 +41,7 @@ def main():
         print("Attempting to get the secret from the server...")
         r = requests.get(secret_url, timeout=5)
 
-        # Check if the request was successful
+        # Check and print the secret if the request was successful
         if r.status_code == 200:
             print(f"Secret received:\n{r.text}")
         else:
