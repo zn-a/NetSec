@@ -2,7 +2,7 @@ from scapy.all import *
 from sys import argv
 
 
-def usage():
+def check_usage():
     print("Send mode: python3 icmp_covert.py send <dest_ip> <message>")
     print("Receive mode: python3 icmp_covert.py receive")
     exit(1)
@@ -10,16 +10,14 @@ def usage():
 
 def main():
     if len(argv) < 2 or argv[1] not in ["send", "receive"]:
-        usage()
+        check_usage()
 
     mode = argv[1]
 
     if mode == "send" and len(argv) != 4:
-        usage()
+        check_usage()
     if mode == "receive" and len(argv) != 2:
-        usage()
-
-    print(f"Mode: {mode}")
+        check_usage()
 
     if mode == "send":
         dest_ip = argv[2]
@@ -32,6 +30,7 @@ def main():
 
         print(f"Sending message to {dest_ip}...")
 
+        # Split the message into pairs of bytes
         for i in range(0, len(data), 2):
             byte1 = data[i]
             byte2 = data[i+1]
