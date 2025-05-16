@@ -40,6 +40,24 @@ def main():
 
         print("Message sent")
 
+    elif mode == "receive":
+        print("Listening for ICMP packets...")
+
+        chars = []
+
+        def handle(pkt):
+            if ICMP in pkt and pkt[ICMP].type == 8:
+                byte1 = pkt[ICMP].id
+                byte2 = pkt[ICMP].seq
+                chars.append(chr(byte1))
+                if byte2 != 0:
+                    chars.append(chr(byte2))
+
+        sniff(filter="icmp", prn=handle, timeout=5)
+
+        message = ''.join(chars)
+        print(message.strip())
+
 
 if __name__ == "__main__":
     main()
