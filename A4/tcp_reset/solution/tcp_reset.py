@@ -7,8 +7,8 @@ def main():
         print("Usage: python3 tcp_reset.py <src_ip> <dst_ip> <dst_port>")
         exit(1)
 
-    src_ip = argv[1]        # 192.168.124.20 (host2)
-    dst_ip = argv[2]        # 192.168.124.10 (host1)
+    src_ip = argv[1]  # 192.168.124.20 (host2)
+    dst_ip = argv[2]  # 192.168.124.10 (host1)
     dst_port = int(argv[3])  # 1337
 
     pkt = sniff(
