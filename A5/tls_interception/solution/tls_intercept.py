@@ -4,6 +4,9 @@ import ssl
 import os
 import threading
 from OpenSSL import crypto
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 ROOT_CA_CERT_PATH = "/certificate/rootCA.crt"
 ROOT_CA_KEY_PATH = "/certificate/rootCA.key"
@@ -12,15 +15,19 @@ CERT_CACHE = {}
 
 
 def generate_certificate(hostname):
+    # forge a valid TLS certificate signed by local root CA
+
     if not os.path.exists(CERT_DIR):
         os.makedirs(CERT_DIR, exist_ok=True)
 
     key_path = os.path.join(CERT_DIR, f"{hostname}.key.pem")
     cert_path = os.path.join(CERT_DIR, f"{hostname}.crt.pem")
 
+    # generate private key
     pkey = crypto.PKey()
     pkey.generate_key(crypto.TYPE_RSA, 2048)
 
+    # create certificate
     cert = crypto.X509()
     cert.get_subject().CN = hostname
     cert.get_subject().C = "NL"
@@ -28,6 +35,7 @@ def generate_certificate(hostname):
     cert.gmtime_adj_notBefore(0)
     cert.gmtime_adj_notAfter(365 * 24 * 60 * 60)
 
+    # load root CA and sign the forged certificate with it
     with open(ROOT_CA_CERT_PATH, "rt") as f:
         root_cert = crypto.load_certificate(crypto.FILETYPE_PEM, f.read())
     with open(ROOT_CA_KEY_PATH, "rt") as f:
@@ -44,6 +52,7 @@ def generate_certificate(hostname):
     print("Certificate request self-signature ok")
     print(f"subject=C = {cert.get_subject().C}, CN = {cert.get_subject().CN}")
 
+    # save the private key and certificate to files
     with open(key_path, "wt") as f:
         f.write(crypto.dump_privatekey(
             crypto.FILETYPE_PEM, pkey).decode("utf-8"))
@@ -74,11 +83,14 @@ def sni_callback(ssl_sock, server_name, ctx):
 
 
 def handle_client(client_ssl, client_addr, hostname):
+    # intercepts encrypted communication between client and server
+
     try:
         remote = socket.create_connection((hostname, 443))
         context = ssl.create_default_context()
         server_ssl = context.wrap_socket(remote, server_hostname=hostname)
 
+        # read HTTP request from client over TLS
         request = b""
         try:
             while b"\r\n\r\n" not in request:
@@ -97,6 +109,7 @@ def handle_client(client_ssl, client_addr, hostname):
 
         server_ssl.sendall(request)
 
+        # read response from server and send back to client
         response = b""
         try:
             while b"\r\n\r\n" not in response:
