@@ -7,12 +7,10 @@ from OpenSSL import crypto
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-
 ROOT_CA_CERT_PATH = "/certificate/rootCA.crt"
 ROOT_CA_KEY_PATH = "/certificate/rootCA.key"
 CERT_DIR = "/tmp/mitm_certs"
 CERT_CACHE = {}
-
 
 def generate_certificate(hostname):
     # forge a valid TLS certificate signed by local root CA
@@ -49,8 +47,9 @@ def generate_certificate(hostname):
     ])
     cert.sign(root_key, "sha256")
 
-    print("Certificate request self-signature ok")
-    print(f"subject=C = {cert.get_subject().C}, CN = {cert.get_subject().CN}")
+    if hostname != "proxy.default.local":
+        print("Certificate request self-signature ok")
+        print(f"subject=C = {cert.get_subject().C}, CN = {cert.get_subject().CN}")
 
     # save the private key and certificate to files
     with open(key_path, "wt") as f:
@@ -62,12 +61,10 @@ def generate_certificate(hostname):
 
     return cert_path, key_path
 
-
 def get_or_generate_cert(hostname):
     if hostname not in CERT_CACHE:
         CERT_CACHE[hostname] = generate_certificate(hostname)
     return CERT_CACHE[hostname]
-
 
 def sni_callback(ssl_sock, server_name, ctx):
     if not server_name:
@@ -80,7 +77,6 @@ def sni_callback(ssl_sock, server_name, ctx):
         ssl_sock.requested_server_name = server_name
     except Exception:
         return ssl.ALERT_DESCRIPTION_INTERNAL_ERROR
-
 
 def handle_client(client_ssl, client_addr, hostname):
     # intercepts encrypted communication between client and server
@@ -155,7 +151,6 @@ def handle_client(client_ssl, client_addr, hostname):
         if 'server_ssl' in locals():
             server_ssl.close()
 
-
 def main():
     if len(argv) != 2:
         print(f"Correct usage: python3 tls_intercept.py 8443")
@@ -192,7 +187,6 @@ def main():
         print("\nShutting down...")
     finally:
         sock.close()
-
 
 if __name__ == "__main__":
     main()
