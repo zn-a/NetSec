@@ -29,7 +29,7 @@ pip install dpkt matplotlib maxminddb-geolite2
       `LIMIT_PACKETS` to process only a subset of data when resources are limited.
     - **Top Ports**
       ```shell
-      python3 data_analysis/top_ports.py
+      python3 data_analysis/top_target_ports.py
       ```
       Shows the ten most targeted TCP and UDP destination ports.
       Set `LIMIT_PACKETS` as above for quick runs.
@@ -41,7 +41,7 @@ pip install dpkt matplotlib maxminddb-geolite2
       Can use `LIMIT_PACKETS`.
     - **Heavy Hitter**
       ```shell
-      python3 data_analysis/heavy_hitter.py
+      python3 data_analysis/heavy_hitter_scanner.py
       ```
       Displays statistics for the scanner with the highest packet count and performs IP geolocation using the bundled
       GeoLite2 database. Obey `LIMIT_PACKETS` if defined.
