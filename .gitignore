@@ -1,0 +1,4 @@
+# Ignore extracted PCAP files
+A6/pcaps/
+# Ignore generated figures
+A6/analysis/*.png
