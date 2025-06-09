@@ -2,3 +2,5 @@
 A6/pcaps/
 # Ignore generated figures
 A6/analysis/*.png
+A6/analysis/venv/
+A6/analysis/__pycache__/
