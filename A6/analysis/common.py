@@ -13,6 +13,14 @@ except Exception:
     GEOIP_READER = None
 
 def iter_packets():
+    """Iterate over IP packets in telescope PCAP files.
+
+    The optional environment variable ``LIMIT_PACKETS`` can be set to
+    an integer to cap how many packets are yielded. This is useful when
+    running in constrained environments or for quick testing.
+    """
+    limit = int(os.environ.get("LIMIT_PACKETS", "0"))
+    count = 0
     files = sorted([f for f in os.listdir(PCAP_DIR) if f.startswith('trace')])
     for fname in files:
         path = os.path.join(PCAP_DIR, fname)
@@ -26,6 +34,9 @@ def iter_packets():
                 if not isinstance(eth.data, dpkt.ip.IP):
                     continue
                 yield ts, eth.data
+                count += 1
+                if limit and count >= limit:
+                    return
 
 def ip_to_str(addr):
     return socket.inet_ntoa(addr)
