@@ -25,7 +25,7 @@ pip install dpkt matplotlib maxminddb-geolite2
       ```shell
       python3 data_analysis/top_scanners.py
       ```
-    - **Top Ports**
+    - **Top Target Ports**
       ```shell
       python3 data_analysis/top_target_ports.py
       ```
@@ -33,7 +33,7 @@ pip install dpkt matplotlib maxminddb-geolite2
       ```shell
       python3 data_analysis/protocol_breakdown.py
       ```
-    - **Heavy Hitter**
+    - **Heavy Hitter Scanner**
       ```shell
       python3 data_analysis/heavy_hitter_scanner.py
       ```
