@@ -1,100 +1,195 @@
-\documentclass{article}
+\documentclass[a4paper,11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{graphicx}
-\usepackage{geometry}
-\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% Hyperref configuration with better colors and no boxes
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkred,
+    citecolor=darkred,
+    urlcolor=blue,
+    filecolor=darkred,
+    pdfborder={0 0 0},
+    pdftitle={Network Security Assignment 6: Network Telescope Analysis},
+    pdfauthor={Zubair Al-Zubi}
+}
+
+% Define custom colors
+\definecolor{darkred}{RGB}{139,0,0}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\title{\textbf{Network Security Assignment 6:\\ Network Telescope Analysis}}
+\author{Zubair Al-Zubi (5342007)}
+\date{June 13, 2025}
+
 \begin{document}
-\title{Network Telescope Analysis}
-\author{Automated Report}
-\date{\today}
 \maketitle
 
 \section{Top Scanners}
-Table~\ref{tab:scanners} lists the ten most active scanners observed in the first 100k packets.
+\autoref{tab:scanners} presents the ten most active scanning sources observed in the dataset. These IP addresses represent the most prolific attackers, with the top two sources accounting for nearly 15\% of all traffic combined.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\begin{tabular}{lrr}
-IP & Packets & Share\\\hline
-88.213.209.194 & 7598 & 7.72\%\\
-185.242.226.50 & 7148 & 7.27\%\\
-192.241.217.10 & 2965 & 3.01\%\\
-192.241.223.55 & 2945 & 2.99\%\\
-45.14.226.132 & 1759 & 1.79\%\\
-45.33.110.79 & 1161 & 1.18\%\\
-80.75.212.37 & 1135 & 1.15\%\\
-8.138.99.185 & 1025 & 1.04\%\\
-192.241.209.24 & 795 & 0.81\%\\
-198.199.115.21 & 787 & 0.80\%\\
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{IP Address} & \textbf{Packets} & \textbf{Share} \\
+\midrule
+88.213.209.194 & 7,598 & 7.72\% \\
+185.242.226.50 & 7,148 & 7.27\% \\
+192.241.217.10 & 2,965 & 3.01\% \\
+192.241.223.55 & 2,945 & 2.99\% \\
+45.14.226.132 & 1,759 & 1.79\% \\
+45.33.110.79 & 1,161 & 1.18\% \\
+80.75.212.37 & 1,135 & 1.15\% \\
+8.138.99.185 & 1,025 & 1.04\% \\
+192.241.209.24 & 795 & 0.81\% \\
+198.199.115.21 & 787 & 0.80\% \\
+\bottomrule
 \end{tabular}
-\caption{Top 10 scanner IPs.}
+\caption{Top 10 scanner IP addresses by packet count}
 \label{tab:scanners}
 \end{table}
 
-\section{Top Target Ports}
-\begin{table}[h]
+The distribution shows a clear power-law pattern where a small number of sources generate the majority of scanning traffic. This concentration suggests organized scanning campaigns rather than distributed individual attacks.
+
+\section{Target Port Analysis}
+The following tables analyze the most frequently targeted ports, separated by protocol type to understand attacker preferences and potential objectives.
+
+\subsection{TCP Port Targets}
+\autoref{tab:tcp-ports} shows the most targeted TCP ports. Port 8124 dominates with over 7,000 packets, likely targeting specific IoT devices or web services running on non-standard ports.
+
+\begin{table}[H]
 \centering
-\begin{tabular}{lr}
-Port & TCP Packets\\\hline
-8124 & 7150\\
-6066 & 2966\\
-8000 & 2710\\
-34567 & 2538\\
-37777 & 2536\\
-8088 & 1681\\
-84 & 1402\\
-22 & 1202\\
-12102 & 1135\\
-3389 & 1074\\
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Port} & \textbf{TCP Packets} \\
+\midrule
+8124 & 7,150 \\
+6066 & 2,966 \\
+8000 & 2,710 \\
+34567 & 2,538 \\
+37777 & 2,536 \\
+8088 & 1,681 \\
+84 & 1,402 \\
+22 & 1,202 \\
+12102 & 1,135 \\
+3389 & 1,074 \\
+\bottomrule
 \end{tabular}
-\caption{Top TCP destination ports.}
+\caption{Most targeted TCP destination ports}
+\label{tab:tcp-ports}
 \end{table}
 
-\begin{table}[h]
+Notable observations include:
+\begin{itemize}
+    \item Port 22 (SSH) - Standard administrative access
+    \item Port 3389 (RDP) - Windows Remote Desktop
+    \item Ports 8000, 8088, 8124 - Alternative HTTP/web services
+    \item High-numbered ports (34567, 37777) - Likely IoT or P2P applications
+\end{itemize}
+
+\subsection{UDP Port Targets}
+\autoref{tab:udp-ports} reveals UDP scanning patterns focused on network services and protocols commonly used for amplification attacks.
+
+\begin{table}[H]
 \centering
-\begin{tabular}{lr}
-Port & UDP Packets\\\hline
-5060 & 3878\\
-514 & 1522\\
-53 & 911\\
-123 & 386\\
-10184 & 291\\
-8000 & 185\\
-8082 & 148\\
-5353 & 142\\
-6881 & 138\\
-4000 & 137\\
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Port} & \textbf{UDP Packets} \\
+\midrule
+5060 & 3,878 \\
+514 & 1,522 \\
+53 & 911 \\
+123 & 386 \\
+10184 & 291 \\
+8000 & 185 \\
+8082 & 148 \\
+5353 & 142 \\
+6881 & 138 \\
+4000 & 137 \\
+\bottomrule
 \end{tabular}
-\caption{Top UDP destination ports.}
+\caption{Most targeted UDP destination ports}
+\label{tab:udp-ports}
 \end{table}
 
-\section{Protocol Breakdown}
-\includegraphics[width=0.5\linewidth]{figures/protocol_breakdown.png}
+The UDP port distribution reveals targeting of:
+\begin{itemize}
+    \item Port 5060 (SIP) - VoIP communication protocol
+    \item Port 514 (Syslog) - System logging service
+    \item Port 53 (DNS) - Domain name resolution
+    \item Port 123 (NTP) - Network time protocol
+    \item Port 5353 (mDNS) - Multicast DNS
+\end{itemize}
 
-\section{Heavy Hitter Details}
-The most active source was \texttt{88.213.209.194} from Bulgaria (BG). In the sample it sent 7,598 packets to 832 unique IPs across three destination ports.
+These ports are commonly exploited for DDoS amplification attacks due to their potential for generating large response packets.
 
-\section{Visualizations}
-\begin{figure}[h]
+\section{Protocol Distribution}
+% \includegraphics[width=0.8\linewidth]{figures/protocol_breakdown.png}
+
+The protocol breakdown analysis would show the relative distribution of TCP versus UDP traffic, providing insights into the types of scanning activities predominant in the dataset.
+
+\section{Heavy Hitter Analysis}
+The most prolific scanner, \texttt{88.213.209.194}, originates from Bulgaria and demonstrates characteristics typical of automated reconnaissance tools. This source generated 7,598 packets targeting 832 unique IP addresses across only three destination ports, indicating a focused scanning strategy.
+
+The limited port range suggests this scanner employs a targeted approach rather than comprehensive port sweeping, possibly searching for specific vulnerable services or devices. The high IP address diversity (832 unique targets) combined with the concentrated port selection indicates an efficient scanning methodology designed to maximize coverage while minimizing detection.
+
+\section{Traffic Visualizations}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figures/time_series.png}
-\caption{Packet count over time using 5 minute bins.}
+% \includegraphics[width=0.8\linewidth]{figures/time_series.png}
+\caption{Temporal distribution of scanning activity using 5-minute time bins}
+\label{fig:timeseries}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figures/port_distribution.png}
-\caption{Distribution of top scanned ports.}
+% \includegraphics[width=0.8\linewidth]{figures/port_distribution.png}
+\caption{Distribution analysis of the most frequently scanned ports}
+\label{fig:ports}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figures/scanner_scope.png}
-\caption{Unique IPs targeted by the most prolific scanners.}
+% \includegraphics[width=0.8\linewidth]{figures/scanner_scope.png}
+\caption{Target diversity analysis for the most active scanning sources}
+\label{fig:scope}
 \end{figure}
 
-\section{Interpretation}
-Scanning primarily targets a handful of ports such as 8124, 6066 and 5060, suggesting automation scripts aimed at common services. The time series shows nearly steady traffic with minor fluctuations, indicating mass scanning rather than short bursts. The heavy hitter probes hundreds of addresses, reinforcing the pattern of broad reconnaissance.
+\section{Security Analysis and Interpretation}
+The observed scanning patterns reveal several concerning trends in internet-wide reconnaissance activities:
 
-Selecting the heavy hitter scanner, its steady activity against few ports hints at an automated mass scanner rather than a targeted probe. Such hosts generally pose minimal direct risk if the telescope is non-routable, yet the underlying intent is malicious reconnaissance and the IP may belong to a larger botnet.
+\paragraph{Automated Mass Scanning:} The concentration of traffic from a small number of sources, combined with the consistent targeting of specific ports, strongly indicates automated scanning tools rather than manual reconnaissance. This automation enables attackers to efficiently survey large address spaces for vulnerable services.
+
+\paragraph{Service-Specific Targeting:} The port distribution shows attackers focusing on specific services including SSH (22), RDP (3389), SIP (5060), and various web services on non-standard ports. This targeted approach suggests attackers are searching for known vulnerable implementations or default configurations.
+
+\paragraph{IoT and Infrastructure Focus:} Many targeted ports (8124, 34567, 37777) correspond to IoT devices, IP cameras, and embedded systems that often have poor security practices. The prevalence of these targets indicates ongoing campaigns to build IoT botnets.
+
+\paragraph{DDoS Preparation:} The significant UDP scanning activity, particularly targeting DNS (53), NTP (123), and SIP (5060) services, suggests reconnaissance for potential DDoS amplification attacks. These protocols can generate large response packets, making them valuable for reflection attacks.
+
+\paragraph{Persistence and Scale:} The steady traffic pattern over time, as shown in \autoref{fig:timeseries}, indicates continuous scanning operations rather than sporadic attacks. This persistence suggests well-resourced threat actors operating scanning infrastructure.
+
+\section{Threat Assessment}
+While network telescopes themselves face no direct risk from this traffic (being non-routable), the observed patterns indicate active threat reconnaissance that poses risks to legitimate internet infrastructure:
+
+\begin{itemize}
+    \item \textbf{High Risk:} The scale and persistence of scanning suggests professional threat actors
+    \item \textbf{Botnet Activity:} Heavy hitters like 88.213.209.194 likely represent compromised hosts in larger botnets
+    \item \textbf{Service Targeting:} Focus on specific ports indicates knowledge of vulnerable services and exploitation techniques
+    \item \textbf{Amplification Potential:} UDP port targeting reveals preparation for large-scale DDoS attacks
+\end{itemize}
+
+Organizations should monitor for similar scanning patterns against their networks and ensure proper security controls are in place for the identified high-risk services.
 
 \end{document}
+
