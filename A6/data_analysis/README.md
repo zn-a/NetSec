@@ -3,14 +3,14 @@
 This folder contains Python scripts used for Assignment 6 data analysis. A Python virtual environment is recommended. Install the required packages with:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv A6
+source A6/bin/activate
 pip install dpkt matplotlib maxminddb-geolite2
 ```
 
-### Running the Scripts
+## Running the Scripts
 
-1. **Extract PCAPs**: unzip the archives from `Assignment Files/` into `A6/pcaps` (already done in the repo).
+1. **Extract PCAPs**: unzip the PCAP archives from `assignment_files/` into the `pcaps/` directory (already done).
 2. **Top Scanners**
    ```bash
    python top_scanners.py
@@ -38,3 +38,7 @@ pip install dpkt matplotlib maxminddb-geolite2
    Each script outputs a PNG figure used in the report. They also respect `LIMIT_PACKETS`.
 
 All scripts assume the PCAP files are located in `../pcaps` relative to this directory.
+
+## Report
+
+`report/report.tex` compiles into `report.pdf` and includes the generated tables and figures.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.5.12)  9 JUN 2025 19:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.5.12)  9 JUN 2025 19:41
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -151,16 +151,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: File `analysis/protocol_breakdown.png' not found on input line 71.
+LaTeX Warning: File `figures/protocol_breakdown.png' not found on input line 71.
 
 
-/home/za/Desktop/NetSec/A6/report/report.tex:71: Package pdftex.def Error: File `analysis/protocol_breakdown.png' not found: using draft setting.
+/home/za/Desktop/NetSec/A6/report/report.tex:71: Package pdftex.def Error: File `figures/protocol_breakdown.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.71 ...inewidth]{analysis/protocol_breakdown.png}
+l.71 ...linewidth]{figures/protocol_breakdown.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -171,16 +171,16 @@ If that doesn't work, type  X <return>  to quit.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: File `analysis/time_series.png' not found on input line 79.
+LaTeX Warning: File `figures/time_series.png' not found on input line 79.
 
 
-/home/za/Desktop/NetSec/A6/report/report.tex:79: Package pdftex.def Error: File `analysis/time_series.png' not found: using draft setting.
+/home/za/Desktop/NetSec/A6/report/report.tex:79: Package pdftex.def Error: File `figures/time_series.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.79 ...h=0.7\linewidth]{analysis/time_series.png}
+l.79 ...th=0.7\linewidth]{figures/time_series.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -189,16 +189,16 @@ If that doesn't work, type  X <return>  to quit.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: File `analysis/port_distribution.png' not found on input line 85.
+LaTeX Warning: File `figures/port_distribution.png' not found on input line 85.
 
 
-/home/za/Desktop/NetSec/A6/report/report.tex:85: Package pdftex.def Error: File `analysis/port_distribution.png' not found: using draft setting.
+/home/za/Desktop/NetSec/A6/report/report.tex:85: Package pdftex.def Error: File `figures/port_distribution.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.85 ...linewidth]{analysis/port_distribution.png}
+l.85 ...\linewidth]{figures/port_distribution.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -207,16 +207,16 @@ If that doesn't work, type  X <return>  to quit.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: File `analysis/scanner_scope.png' not found on input line 91.
+LaTeX Warning: File `figures/scanner_scope.png' not found on input line 91.
 
 
-/home/za/Desktop/NetSec/A6/report/report.tex:91: Package pdftex.def Error: File `analysis/scanner_scope.png' not found: using draft setting.
+/home/za/Desktop/NetSec/A6/report/report.tex:91: Package pdftex.def Error: File `figures/scanner_scope.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.91 ...0.7\linewidth]{analysis/scanner_scope.png}
+l.91 ...=0.7\linewidth]{figures/scanner_scope.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -247,14 +247,14 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
  ) 
 Here is how much of TeX's memory you used:
  1989 strings out of 473197
- 34355 string characters out of 5718605
+ 34235 string characters out of 5718605
  433414 words of memory out of 5000000
  25265 multiletter control sequences out of 15000+600000
  562953 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,8n,65p,412b,253s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (5 pages, 84885 bytes).
+Output written on report.pdf (5 pages, 84842 bytes).
 PDF statistics:
  50 PDF objects out of 1000 (max. 8388607)
  30 compressed objects within 1 object stream
