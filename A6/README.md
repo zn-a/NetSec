@@ -3,8 +3,8 @@
 This folder contains Python scripts used for Assignment 6 data analysis. A Python virtual environment is recommended. Install the required packages with:
 
 ```bash
-python3 -m venv A6
-source A6/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install dpkt matplotlib maxminddb-geolite2
 ```
 
