@@ -65,4 +65,4 @@ The PDF report is compiled from LaTeX using the command:
 pdflatex -output-directory=report report/report.tex
 ```
 
-The output will be saved as: `report/report.pdf`.
+The output will be saved as: `report/report.pdf` and the figures are stored in `report/figures`.
