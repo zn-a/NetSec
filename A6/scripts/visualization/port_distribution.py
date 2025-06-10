@@ -1,6 +1,10 @@
 import dpkt
 import matplotlib.pyplot as plt
 from collections import Counter
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from common import iter_packets
 
 tcp_ports = Counter()
@@ -21,4 +25,4 @@ plt.xticks(range(len(ports)), ports)
 plt.xlabel('Port')
 plt.ylabel('Packets')
 plt.title('Top 10 Scanned Ports (TCP)')
-plt.savefig('port_distribution.png')
+plt.savefig('report/figures/port_distribution.pdf')

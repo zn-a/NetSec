@@ -1,6 +1,10 @@
 import dpkt
 import matplotlib.pyplot as plt
 from collections import defaultdict
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from common import iter_packets
 
 bins = defaultdict(int)
@@ -19,9 +23,9 @@ for ts, ip in iter_packets():
 x = sorted(bins.keys())
 y = [bins[i] for i in x]
 plt.figure()
-plt.plot([i*5 for i in x], y, marker='o')
+plt.plot([i * 5 for i in x], y, marker='o')
 plt.xlabel('Minutes')
 plt.ylabel('Packets')
 plt.title('Packet Count Over Time (5 min bins)')
 plt.grid(True)
-plt.savefig('time_series.png')
+plt.savefig('report/figures/time_series.pdf')

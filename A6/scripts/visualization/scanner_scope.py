@@ -1,6 +1,10 @@
 import dpkt
 import matplotlib.pyplot as plt
 from collections import Counter, defaultdict
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from common import iter_packets, ip_to_str
 
 scanners = defaultdict(set)
@@ -17,10 +21,10 @@ counts = Counter({s: len(dsts) for s, dsts in scanners.items()})
 
 top = counts.most_common(10)
 ips, nums = zip(*top)
-plt.figure(figsize=(8,4))
+plt.figure(figsize=(8, 4))
 plt.bar(range(len(ips)), nums)
 plt.xticks(range(len(ips)), ips, rotation=45, ha='right')
 plt.ylabel('Unique IPs scanned')
 plt.title('Scope of Top Scanners')
 plt.tight_layout()
-plt.savefig('scanner_scope.png')
+plt.savefig('report/figures/scanner_scope.pdf')

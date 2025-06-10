@@ -19,26 +19,41 @@ pip install dpkt matplotlib maxminddb-geolite2
    ```shell
    source .venv/bin/activate
    ```
-3. **Run the scripts (from root directory `A6/`)**:
+3. **Run the scripts (from root directory `A6/`)**.
 
-    - **Top Scanners**
-      ```shell
-      python3 scripts/top_scanners.py         # 1m18s
-      ```
-    - **Top Target Ports**
-      ```shell
-      python3 scripts/top_target_ports.py     # 1m17s
-      ```
-    - **Protocol Breakdown**
-      ```shell
-      python3 scripts/protocol_breakdown.py   # 1m16s
-      ```
-    - **Heavy Hitter Scanner**
-      ```shell
-      python3 scripts/heavy_hitter_scanner.py # 2m24s
-      ```
-    - **Visualization Scripts** (`time_series.py`, `port_distribution.py`, `scanner_scope.py`)
-      Each script outputs a PNG figure used in the report. They also respect `LIMIT_PACKETS`.
+### Data Analysis Scripts
+
+- **Top Scanners**
+  ```shell
+  python3 scripts/top_scanners.py         # 1m18s
+  ```
+- **Top Target Ports**
+  ```shell
+  python3 scripts/top_target_ports.py     # 1m17s
+  ```
+- **Protocol Breakdown**
+  ```shell
+  python3 scripts/protocol_breakdown.py   # 1m16s
+  ```
+- **Heavy Hitter Scanner**
+  ```shell
+  python3 scripts/heavy_hitter_scanner.py # 2m24s
+  ```
+
+### Visualization Scripts
+
+- **Time Series**
+  ```shell
+  python3 scripts/visualization/time_series.py        # 1m09s
+  ```
+- **Port Distribution**
+  ```shell
+  python3 scripts/visualization/port_distribution.py  # 1m14s
+  ```
+- **Scanner Scope**
+  ```shell
+  python3 scripts/visualization/scanner_scope.py      # 1m17s
+  ```
 
 All scripts assume the PCAP files are located in `../pcaps` relative to this directory.
 

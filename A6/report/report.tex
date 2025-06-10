@@ -18,8 +18,6 @@
     urlcolor=blue,
     filecolor=darkred,
     pdfborder={0 0 0},
-    pdftitle={Network Security Assignment 6: Network Telescope Analysis},
-    pdfauthor={Zubair Al-Zubi}
 }
 
 % Define custom colors
@@ -28,7 +26,7 @@
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
 
-\title{\textbf{CS443 - Network Security Assignment 6:\\ Network Telescope Analysis}}
+\title{\textbf{CS4430 -- Network Security Assignment 6:\\ Network Telescope Analysis}}
 \author{Zubair Al-Zubi (5342007)}
 \date{June 13, 2025}
 
@@ -129,7 +127,8 @@ This report shows the results of analyzing network traffic from a telescope sens
 \end{figure}
 
 \section{Heavy Hitter Scanner}
-\autoref{tab:heavyhitter} shows the scanner that sent the most packets. It was responsible for over 188,000 TCP SYN and UDP packets. This scanner targeted 5,782 unique IP addresses and 43 different ports. GeoIP lookup indicates it originated from the Netherlands (country code \texttt{NL}), suggesting potential use of a hosting provider for broad automated scans.
+\autoref{tab:heavyhitter} shows the scanner with the highest number of packets. IP address \texttt{185.242.226.50} sent over 188,000 TCP SYN and UDP packets, targeting 49,853 unique IP addresses and 4 different ports. This indicates a broad scanning strategy, likely automated. The IP geolocates to the Netherlands (country code \texttt{NL}).
+
 
 \begin{table}[H]
 \centering
@@ -138,9 +137,9 @@ This report shows the results of analyzing network traffic from a telescope sens
 \textbf{Field} & \textbf{Value} \\
 \midrule
 Scanner IP       & 185.242.226.50 \\
-Packets          & 188,293 \\
-Destination IPs  & 49,853 \\
-Ports            & 4 \\
+Number of packets          & 188,293 \\
+Number of destination IPs  & 49,853 \\
+Number of ports            & 4 \\
 Country          & NL \\
 \bottomrule
 \end{tabular}
@@ -148,11 +147,12 @@ Country          & NL \\
 \label{tab:heavyhitter}
 \end{table}
 
-The most prolific scanner, \texttt{88.213.209.194}, originates from Bulgaria and demonstrates characteristics typical of automated reconnaissance tools. This source generated 7,598 packets targeting 832 unique IP addresses across only three destination ports, indicating a focused scanning strategy.
 
-The limited port range suggests this scanner employs a targeted approach rather than comprehensive port sweeping, possibly searching for specific vulnerable services or devices. The high IP address diversity (832 unique targets) combined with the concentrated port selection indicates an efficient scanning methodology designed to maximize coverage while minimizing detection.
+\section{Traffic Visualizations}
 
-% \section{Traffic Visualizations}
+
+
+\section{Interpretation and Reasoning}
 % \begin{figure}[H]
 % \centering
 % % \includegraphics[width=0.8\linewidth]{figures/time_series.png}
@@ -188,16 +188,16 @@ The limited port range suggests this scanner employs a targeted approach rather 
 % \paragraph{Persistence and Scale:} The steady traffic pattern over time, as shown in \autoref{fig:timeseries}, indicates continuous scanning operations rather than sporadic attacks. This persistence suggests well-resourced threat actors operating scanning infrastructure.
 
 % \section{Threat Assessment}
-While network telescopes themselves face no direct risk from this traffic (being non-routable), the observed patterns indicate active threat reconnaissance that poses risks to legitimate internet infrastructure:
+% While network telescopes themselves face no direct risk from this traffic (being non-routable), the observed patterns indicate active threat reconnaissance that poses risks to legitimate internet infrastructure:
 
-\begin{itemize}
-    \item \textbf{High Risk:} The scale and persistence of scanning suggests professional threat actors
-    \item \textbf{Botnet Activity:} Heavy hitters like 88.213.209.194 likely represent compromised hosts in larger botnets
-    \item \textbf{Service Targeting:} Focus on specific ports indicates knowledge of vulnerable services and exploitation techniques
-    \item \textbf{Amplification Potential:} UDP port targeting reveals preparation for large-scale DDoS attacks
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{High Risk:} The scale and persistence of scanning suggests professional threat actors
+%     \item \textbf{Botnet Activity:} Heavy hitters like 88.213.209.194 likely represent compromised hosts in larger botnets
+%     \item \textbf{Service Targeting:} Focus on specific ports indicates knowledge of vulnerable services and exploitation techniques
+%     \item \textbf{Amplification Potential:} UDP port targeting reveals preparation for large-scale DDoS attacks
+% \end{itemize}
 
-Organizations should monitor for similar scanning patterns against their networks and ensure proper security controls are in place for the identified high-risk services.
+% Organizations should monitor for similar scanning patterns against their networks and ensure proper security controls are in place for the identified high-risk services.
 
 \end{document}
 
