@@ -23,19 +23,19 @@ pip install dpkt matplotlib maxminddb-geolite2
 
     - **Top Scanners**
       ```shell
-      python3 data_analysis/top_scanners.py
+      python3 scripts/top_scanners.py
       ```
     - **Top Target Ports**
       ```shell
-      python3 data_analysis/top_target_ports.py
+      python3 scripts/top_target_ports.py
       ```
     - **Protocol Breakdown**
       ```shell
-      python3 data_analysis/protocol_breakdown.py
+      python3 scripts/protocol_breakdown.py
       ```
     - **Heavy Hitter Scanner**
       ```shell
-      python3 data_analysis/heavy_hitter_scanner.py
+      python3 scripts/heavy_hitter_scanner.py
       ```
     - **Visualization Scripts** (`time_series.py`, `port_distribution.py`, `scanner_scope.py`)
       Each script outputs a PNG figure used in the report. They also respect `LIMIT_PACKETS`.
