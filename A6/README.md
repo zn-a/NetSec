@@ -1,7 +1,7 @@
 # Assignment 6: Network Telescope Analysis
 
-This folder contains Python scripts used for Assignment 6. A Python virtual environment `.venv` is used to manage
-dependencies:
+This folder contains the Python scripts used for Assignment 6 of CS4430 Network Security. A Python virtual environment `.venv` is used to manage
+dependencies.
 
 ## Setup Instructions
 
@@ -65,4 +65,4 @@ The PDF report is compiled from LaTeX using the command:
 pdflatex -output-directory=report report/report.tex
 ```
 
-The output will be saved as: `report/report.pdf` and the figures are stored in `report/figures`.
+The output will be saved as: `report/report.pdf` and the figures used are stored in `report/figures`.
