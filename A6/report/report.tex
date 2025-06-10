@@ -28,15 +28,17 @@
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
 
-\title{\textbf{Network Security Assignment 6:\\ Network Telescope Analysis}}
+\title{\textbf{CS443 - Network Security Assignment 6:\\ Network Telescope Analysis}}
 \author{Zubair Al-Zubi (5342007)}
 \date{June 13, 2025}
 
 \begin{document}
-\maketitle
+\maketitle 
+This report shows the results of analyzing network traffic from a telescope sensor. The goal is to find scanning behavior, top scanner IPs, and protocol use. The analysis was done using Python scripts on the provided PCAP files.
+
 
 \section{Top Scanners}
-\autoref{tab:scanners} presents the ten most active scanning sources observed in the dataset. These IP addresses represent the most prolific attackers, with the top two sources accounting for nearly 15\% of all traffic combined.
+\autoref{tab:scanners} presents the ten most active scanning sources observed in the dataset. The top scanners were identified based on the volume of TCP SYN and UDP packets they generated. These ten IPs alone accounted for over 9\% of total scanning traffic. The highest contributor, 185.242.226.50, sent more than 188,000 packets, indicating likely use of automated scanning tools or botnet infrastructure.
 
 \begin{table}[H]
 \centering
@@ -61,10 +63,45 @@
 \end{table}
 
 
-The distribution shows a clear power-law pattern where a small number of sources generate the majority of scanning traffic. This concentration suggests organized scanning campaigns rather than distributed individual attacks.
-
 \section{Target Port Analysis}
-The following tables analyze the most frequently targeted ports, separated by protocol type to understand attacker preferences and potential objectives.
+\autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (e.g., 22, 80, 443), while UDP scanning targeted DNS, SIP, and network service discovery. These results reflect broad automated probing for known services.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lcr@{}}
+\toprule
+\textbf{Port} & \textbf{Protocol} & \textbf{Packets} \\
+\midrule
+22    & TCP & 174,938 \\
+3389  & TCP & 101,839 \\
+80    & TCP & 90,764  \\
+8088  & TCP & 82,746  \\
+8080  & TCP & 80,344  \\
+8728  & TCP & 76,159  \\
+5555  & TCP & 69,330  \\
+443   & TCP & 53,354  \\
+8122  & TCP & 51,620  \\
+12103 & TCP & 50,686  \\
+514   & TCP & 144,733 \\
+\midrule
+514   & UDP & 144,733 \\
+53    & UDP & 91,129  \\
+5060  & UDP & 63,392  \\
+1194  & UDP & 40,973  \\
+32410 & UDP & 27,957  \\
+123   & UDP & 23,558  \\
+55001 & UDP & 13,926  \\
+1900  & UDP & 13,211  \\
+6881  & UDP & 13,009  \\
+5353  & UDP & 11,856  \\
+\bottomrule
+\end{tabular}
+\caption{Top 10 destination ports for TCP and UDP scans}
+\label{tab:ports}
+\end{table}
+
+
+
 
 \subsection{TCP Port Targets}
 \autoref{tab:tcp-ports} shows the most targeted TCP ports. Port 8124 dominates with over 7,000 packets, likely targeting specific IoT devices or web services running on non-standard ports.
