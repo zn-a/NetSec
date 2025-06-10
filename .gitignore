@@ -1,13 +1,2 @@
-# Ignore extracted PCAP files
-A6/pcaps/
-
-# Ignore generated figures
-A6/data_analysis/*.png
-A6/data_analysis/venv/
-A6/data_analysis/__pycache__/
-A6/A6/
-A6/report/*.aux
-A6/report/*.log
-A6/report/*.fls
-A6/report/*.fdb_latexmk
-A6/report/*.synctex.gz
+# Ignore zipped PCAP files
+A6/assignment_files/*.zip
