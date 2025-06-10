@@ -1,2 +1,4 @@
 # Ignore zipped PCAP files
 A6/assignment_files/*.zip
+
+.idea/
