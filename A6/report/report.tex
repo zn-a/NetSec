@@ -38,7 +38,9 @@ This report shows the results of analyzing network traffic from a telescope sens
 
 
 \section{Top Scanners}
-\autoref{tab:scanners} presents the ten most active scanning sources observed in the dataset. The top scanners were identified based on the volume of TCP SYN and UDP packets they generated. These ten IPs alone accounted for over 9\% of total scanning traffic. The highest contributor, 185.242.226.50, sent more than 188,000 packets, indicating likely use of automated scanning tools or botnet infrastructure.
+\autoref{tab:scanners} shows the ten most active scanning sources by packet volume. These IPs generated over 9\% of total traffic, with 185.242.226.50 contributing 188,000+ packets, indicating automated scanning tools or botnet activity.
+
+
 
 \begin{table}[H]
 \centering
@@ -68,116 +70,65 @@ This report shows the results of analyzing network traffic from a telescope sens
 
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}lcr@{}}
+\begin{subtable}[t]{0.45\textwidth}
+\centering
+\begin{tabular}{@{}cr@{}}
 \toprule
-\textbf{Port} & \textbf{Protocol} & \textbf{Packets} \\
+\textbf{Port} & \textbf{Packets} \\
 \midrule
-22    & TCP & 174,938 \\
-3389  & TCP & 101,839 \\
-80    & TCP & 90,764  \\
-8088  & TCP & 82,746  \\
-8080  & TCP & 80,344  \\
-8728  & TCP & 76,159  \\
-5555  & TCP & 69,330  \\
-443   & TCP & 53,354  \\
-8122  & TCP & 51,620  \\
-12103 & TCP & 50,686  \\
-514   & TCP & 144,733 \\
-\midrule
-514   & UDP & 144,733 \\
-53    & UDP & 91,129  \\
-5060  & UDP & 63,392  \\
-1194  & UDP & 40,973  \\
-32410 & UDP & 27,957  \\
-123   & UDP & 23,558  \\
-55001 & UDP & 13,926  \\
-1900  & UDP & 13,211  \\
-6881  & UDP & 13,009  \\
-5353  & UDP & 11,856  \\
+22    & 174,938 \\
+3389  & 101,839 \\
+80    & 90,764  \\
+8088  & 82,746  \\
+8080  & 80,344  \\
+8728  & 76,159  \\
+5555  & 69,330  \\
+443   & 53,354  \\
+8122  & 51,620  \\
+12103 & 50,686  \\
 \bottomrule
 \end{tabular}
+\caption{TCP Scans}
+\label{tab:tcp-ports}
+\end{subtable}
+\hfill
+\begin{subtable}[t]{0.45\textwidth}
+\centering
+\begin{tabular}{@{}cr@{}}
+\toprule
+\textbf{Port} & \textbf{Packets} \\
+\midrule
+514   & 144,733 \\
+53    & 91,129  \\
+5060  & 63,392  \\
+1194  & 40,973  \\
+32410 & 27,957  \\
+123   & 23,558  \\
+55001 & 13,926  \\
+1900  & 13,211  \\
+6881  & 13,009  \\
+5353  & 11,856  \\
+\bottomrule
+\end{tabular}
+\caption{UDP Scans}
+\label{tab:udp-ports}
+\end{subtable}
 \caption{Top 10 destination ports for TCP and UDP scans}
 \label{tab:ports}
 \end{table}
 
 
+\section{Protocol Breakdown}
+\autoref{fig:protocol_breakdown} shows the protocol breakdown of the captured traffic. TCP dominates with 7,404,342 packets (91.4\%) versus UDP's 697,351 packets (8.6\%). This reflects typical scanning patterns targeting web and remote access services.
 
-
-\subsection{TCP Port Targets}
-\autoref{tab:tcp-ports} shows the most targeted TCP ports. Port 8124 dominates with over 7,000 packets, likely targeting specific IoT devices or web services running on non-standard ports.
-
-\begin{table}[H]
+\begin{figure}[H]
 \centering
-\begin{tabular}{@{}lr@{}}
-\toprule
-\textbf{Port} & \textbf{TCP Packets} \\
-\midrule
-8124 & 7,150 \\
-6066 & 2,966 \\
-8000 & 2,710 \\
-34567 & 2,538 \\
-37777 & 2,536 \\
-8088 & 1,681 \\
-84 & 1,402 \\
-22 & 1,202 \\
-12102 & 1,135 \\
-3389 & 1,074 \\
-\bottomrule
-\end{tabular}
-\caption{Most targeted TCP destination ports}
-\label{tab:tcp-ports}
-\end{table}
+\includegraphics[width=0.75\linewidth]{figures/protocol_breakdown.pdf}
+\caption{Protocol breakdown showing TCP vs UDP packet counts in the dataset}
+\label{fig:protocol_breakdown}
+\end{figure}
 
-Notable observations include:
-\begin{itemize}
-    \item Port 22 (SSH) - Standard administrative access
-    \item Port 3389 (RDP) - Windows Remote Desktop
-    \item Ports 8000, 8088, 8124 - Alternative HTTP/web services
-    \item High-numbered ports (34567, 37777) - Likely IoT or P2P applications
-\end{itemize}
-
-\subsection{UDP Port Targets}
-\autoref{tab:udp-ports} reveals UDP scanning patterns focused on network services and protocols commonly used for amplification attacks.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lr@{}}
-\toprule
-\textbf{Port} & \textbf{UDP Packets} \\
-\midrule
-5060 & 3,878 \\
-514 & 1,522 \\
-53 & 911 \\
-123 & 386 \\
-10184 & 291 \\
-8000 & 185 \\
-8082 & 148 \\
-5353 & 142 \\
-6881 & 138 \\
-4000 & 137 \\
-\bottomrule
-\end{tabular}
-\caption{Most targeted UDP destination ports}
-\label{tab:udp-ports}
-\end{table}
-
-The UDP port distribution reveals targeting of:
-\begin{itemize}
-    \item Port 5060 (SIP) - VoIP communication protocol
-    \item Port 514 (Syslog) - System logging service
-    \item Port 53 (DNS) - Domain name resolution
-    \item Port 123 (NTP) - Network time protocol
-    \item Port 5353 (mDNS) - Multicast DNS
-\end{itemize}
-
-These ports are commonly exploited for DDoS amplification attacks due to their potential for generating large response packets.
-
-\section{Protocol Distribution}
-% \includegraphics[width=0.8\linewidth]{figures/protocol_breakdown.png}
-
-The protocol breakdown analysis would show the relative distribution of TCP versus UDP traffic, providing insights into the types of scanning activities predominant in the dataset.
-
-\section{Heavy Hitter Analysis}
+\section{Heavy Hitter Scanner}
 The most prolific scanner, \texttt{88.213.209.194}, originates from Bulgaria and demonstrates characteristics typical of automated reconnaissance tools. This source generated 7,598 packets targeting 832 unique IP addresses across only three destination ports, indicating a focused scanning strategy.
 
 The limited port range suggests this scanner employs a targeted approach rather than comprehensive port sweeping, possibly searching for specific vulnerable services or devices. The high IP address diversity (832 unique targets) combined with the concentrated port selection indicates an efficient scanning methodology designed to maximize coverage while minimizing detection.

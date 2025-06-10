@@ -23,15 +23,15 @@ pip install dpkt matplotlib maxminddb-geolite2
 
     - **Top Scanners**
       ```shell
-      python3 scripts/top_scanners.py         # 2m13s
+      python3 scripts/top_scanners.py         # 1m18s
       ```
     - **Top Target Ports**
       ```shell
-      python3 scripts/top_target_ports.py     # 3m44s
+      python3 scripts/top_target_ports.py     # 1m17s
       ```
     - **Protocol Breakdown**
       ```shell
-      python3 scripts/protocol_breakdown.py   # XXmXXs
+      python3 scripts/protocol_breakdown.py   # 1m16s
       ```
     - **Heavy Hitter Scanner**
       ```shell

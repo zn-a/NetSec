@@ -2,6 +2,7 @@ from collections import Counter
 import dpkt
 import matplotlib.pyplot as plt
 from common import iter_packets
+import csv
 
 counts = Counter()
 for ts, ip in iter_packets():
@@ -18,5 +19,12 @@ values = [counts[l] for l in labels]
 plt.figure(figsize=(4,4))
 plt.pie(values, labels=labels, autopct='%1.1f%%')
 plt.title('Protocol Breakdown')
-plt.savefig('protocol_breakdown.png')
+plt.savefig('report/figures/protocol_breakdown.pdf')
 print('Protocol counts:', counts)
+
+# Save CSV output
+with open('output/protocol_breakdown_output.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['Protocol', 'Count'])
+    for protocol, count in counts.items():
+        writer.writerow([protocol, count])
