@@ -35,7 +35,7 @@ pip install dpkt matplotlib maxminddb-geolite2
       ```
     - **Heavy Hitter Scanner**
       ```shell
-      python3 scripts/heavy_hitter_scanner.py # XXmXXs
+      python3 scripts/heavy_hitter_scanner.py # 2m24s
       ```
     - **Visualization Scripts** (`time_series.py`, `port_distribution.py`, `scanner_scope.py`)
       Each script outputs a PNG figure used in the report. They also respect `LIMIT_PACKETS`.

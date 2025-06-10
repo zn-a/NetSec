@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 from common import iter_packets, ip_to_str
 
+
 # Count TCP SYNs and UDP packets
 counts = Counter()
 for ts, ip in iter_packets():
@@ -29,7 +30,7 @@ with open(output_path, "w", newline="") as f:
         share = 100 * count / total if total else 0
         writer.writerow([ip, count, f"{share:.2f}%"])
 
-# Print nicely formatted table to terminal
+# Print formatted table to terminal
 print("Top 10 Scanners (by packet count)\n")
 print(f"{'IP':<20}\t{'Packets':>8}\t{'Share':>6}")
 for ip, count in top_10:

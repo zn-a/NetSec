@@ -1,6 +1,8 @@
 from collections import Counter, defaultdict
 import dpkt
 from common import iter_packets, ip_to_str, GEOIP_READER
+from pathlib import Path
+import csv
 
 counts = Counter()
 for ts, ip in iter_packets():
@@ -35,6 +37,21 @@ if GEOIP_READER:
     if geo and 'country' in geo:
         info['country'] = geo['country']['iso_code']
 
+# Output setup
+output_path = Path("output/heavy_hitter_scanner_output.csv")
+output_path.parent.mkdir(exist_ok=True)
+
+# Write to CSV
+with open(output_path, "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Field", "Value"])
+    writer.writerow(["Scanner IP", scanner])
+    writer.writerow(["Packets", packets])
+    writer.writerow(["Destination IPs", len(dest_ips)])
+    writer.writerow(["Ports", len(ports)])
+    writer.writerow(["Country", info["country"]])
+
+# Print table to terminal
 print(f"Heavy Hitter Scanner: {scanner}")
 print(f"Packets: {packets}")
 print(f"Destination IPs: {len(dest_ips)}")

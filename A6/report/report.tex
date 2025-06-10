@@ -65,7 +65,7 @@ This report shows the results of analyzing network traffic from a telescope sens
 \end{table}
 
 
-\section{Target Port Analysis}
+\section{Top Target Ports}
 \autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (e.g., 22, 80, 443), while UDP scanning targeted DNS, SIP, and network service discovery. These results reflect broad automated probing for known services.
 
 \begin{table}[H]
@@ -129,46 +129,65 @@ This report shows the results of analyzing network traffic from a telescope sens
 \end{figure}
 
 \section{Heavy Hitter Scanner}
+\autoref{tab:heavyhitter} shows the scanner that sent the most packets. It was responsible for over 188,000 TCP SYN and UDP packets. This scanner targeted 5,782 unique IP addresses and 43 different ports. GeoIP lookup indicates it originated from the Netherlands (country code \texttt{NL}), suggesting potential use of a hosting provider for broad automated scans.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Field} & \textbf{Value} \\
+\midrule
+Scanner IP       & 185.242.226.50 \\
+Packets          & 188,293 \\
+Destination IPs  & 49,853 \\
+Ports            & 4 \\
+Country          & NL \\
+\bottomrule
+\end{tabular}
+\caption{Profile of the heavy-hitter scanner}
+\label{tab:heavyhitter}
+\end{table}
+
 The most prolific scanner, \texttt{88.213.209.194}, originates from Bulgaria and demonstrates characteristics typical of automated reconnaissance tools. This source generated 7,598 packets targeting 832 unique IP addresses across only three destination ports, indicating a focused scanning strategy.
 
 The limited port range suggests this scanner employs a targeted approach rather than comprehensive port sweeping, possibly searching for specific vulnerable services or devices. The high IP address diversity (832 unique targets) combined with the concentrated port selection indicates an efficient scanning methodology designed to maximize coverage while minimizing detection.
 
-\section{Traffic Visualizations}
-\begin{figure}[H]
-\centering
-% \includegraphics[width=0.8\linewidth]{figures/time_series.png}
-\caption{Temporal distribution of scanning activity using 5-minute time bins}
-\label{fig:timeseries}
-\end{figure}
+% \section{Traffic Visualizations}
+% \begin{figure}[H]
+% \centering
+% % \includegraphics[width=0.8\linewidth]{figures/time_series.png}
+% \caption{Temporal distribution of scanning activity using 5-minute time bins}
+% \label{fig:timeseries}
+% \end{figure}
 
-\begin{figure}[H]
-\centering
-% \includegraphics[width=0.8\linewidth]{figures/port_distribution.png}
-\caption{Distribution analysis of the most frequently scanned ports}
-\label{fig:ports}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% % \includegraphics[width=0.8\linewidth]{figures/port_distribution.png}
+% \caption{Distribution analysis of the most frequently scanned ports}
+% \label{fig:ports}
+% \end{figure}
 
-\begin{figure}[H]
-\centering
-% \includegraphics[width=0.8\linewidth]{figures/scanner_scope.png}
-\caption{Target diversity analysis for the most active scanning sources}
-\label{fig:scope}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% % \includegraphics[width=0.8\linewidth]{figures/scanner_scope.png}
+% \caption{Target diversity analysis for the most active scanning sources}
+% \label{fig:scope}
+% \end{figure}
 
-\section{Security Analysis and Interpretation}
-The observed scanning patterns reveal several concerning trends in internet-wide reconnaissance activities:
+% \section{Security Analysis and Interpretation}
+% The observed scanning patterns reveal several concerning trends in internet-wide reconnaissance activities:
 
-\paragraph{Automated Mass Scanning:} The concentration of traffic from a small number of sources, combined with the consistent targeting of specific ports, strongly indicates automated scanning tools rather than manual reconnaissance. This automation enables attackers to efficiently survey large address spaces for vulnerable services.
+% \paragraph{Automated Mass Scanning:} The concentration of traffic from a small number of sources, combined with the consistent targeting of specific ports, strongly indicates automated scanning tools rather than manual reconnaissance. This automation enables attackers to efficiently survey large address spaces for vulnerable services.
 
-\paragraph{Service-Specific Targeting:} The port distribution shows attackers focusing on specific services including SSH (22), RDP (3389), SIP (5060), and various web services on non-standard ports. This targeted approach suggests attackers are searching for known vulnerable implementations or default configurations.
+% \paragraph{Service-Specific Targeting:} The port distribution shows attackers focusing on specific services including SSH (22), RDP (3389), SIP (5060), and various web services on non-standard ports. This targeted approach suggests attackers are searching for known vulnerable implementations or default configurations.
 
-\paragraph{IoT and Infrastructure Focus:} Many targeted ports (8124, 34567, 37777) correspond to IoT devices, IP cameras, and embedded systems that often have poor security practices. The prevalence of these targets indicates ongoing campaigns to build IoT botnets.
+% \paragraph{IoT and Infrastructure Focus:} Many targeted ports (8124, 34567, 37777) correspond to IoT devices, IP cameras, and embedded systems that often have poor security practices. The prevalence of these targets indicates ongoing campaigns to build IoT botnets.
 
-\paragraph{DDoS Preparation:} The significant UDP scanning activity, particularly targeting DNS (53), NTP (123), and SIP (5060) services, suggests reconnaissance for potential DDoS amplification attacks. These protocols can generate large response packets, making them valuable for reflection attacks.
+% \paragraph{DDoS Preparation:} The significant UDP scanning activity, particularly targeting DNS (53), NTP (123), and SIP (5060) services, suggests reconnaissance for potential DDoS amplification attacks. These protocols can generate large response packets, making them valuable for reflection attacks.
 
-\paragraph{Persistence and Scale:} The steady traffic pattern over time, as shown in \autoref{fig:timeseries}, indicates continuous scanning operations rather than sporadic attacks. This persistence suggests well-resourced threat actors operating scanning infrastructure.
+% \paragraph{Persistence and Scale:} The steady traffic pattern over time, as shown in \autoref{fig:timeseries}, indicates continuous scanning operations rather than sporadic attacks. This persistence suggests well-resourced threat actors operating scanning infrastructure.
 
-\section{Threat Assessment}
+% \section{Threat Assessment}
 While network telescopes themselves face no direct risk from this traffic (being non-routable), the observed patterns indicate active threat reconnaissance that poses risks to legitimate internet infrastructure:
 
 \begin{itemize}
