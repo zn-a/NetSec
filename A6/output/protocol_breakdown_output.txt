@@ -1,1 +1,0 @@
-Protocol counts: Counter({'TCP': 88653, 'UDP': 9720})
