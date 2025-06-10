@@ -40,5 +40,3 @@ print("\nTop 10 UDP Destination Ports")
 print(f"{'Port':<8}{'Packets':>10}")
 for port, count in udp_ports.most_common(10):
     print(f"{port:<8}{count:>10}")
-
-print(f"\nResults saved to: {output_path}")

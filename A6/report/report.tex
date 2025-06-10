@@ -148,56 +148,48 @@ Country          & NL \\
 \end{table}
 
 
-\section{Traffic Visualizations}
+\section{Visualization}
 
+\subsection{Time Series}
+\autoref{fig:time_series_plot} shows the number of scanning packets observed over time, grouped into 5-minute bins. The traffic starts at a peak of nearly 1.5 million packets and gradually decreases before showing a slight rise again near the end.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/time_series.pdf}
+    \caption{Packet count over time in 5-minute intervals}
+    \label{fig:time_series_plot}
+\end{figure}
+
+
+\subsection{Port Distribution}
+\autoref{fig:port_distribution_plot} shows the top 10 most scanned TCP and UDP destination ports. TCP scans target services such as SSH (22), RDP (3389), and HTTP(S), while UDP scans focus on DNS (53), syslog (514), SIP (5060), and NTP (123).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/port_distribution.pdf}
+\caption{Top 10 scanned TCP and UDP ports}
+\label{fig:port_distribution_plot}
+\end{figure}
+ 
+
+\subsection{Scanner Scope}
+\autoref{fig:scanner_scope_plot} shows the number of unique destination IP addresses contacted by the top 10 scanner IPs. The most aggressive scanner contacted nearly 50,000 IPs.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/scanner_scope.pdf}
+\caption{Number of unique IPs scanned by the top 10 scanners}
+\label{fig:scanner_scope_plot}
+\end{figure}
 
 
 \section{Interpretation and Reasoning}
-% \begin{figure}[H]
-% \centering
-% % \includegraphics[width=0.8\linewidth]{figures/time_series.png}
-% \caption{Temporal distribution of scanning activity using 5-minute time bins}
-% \label{fig:timeseries}
-% \end{figure}
 
-% \begin{figure}[H]
-% \centering
-% % \includegraphics[width=0.8\linewidth]{figures/port_distribution.png}
-% \caption{Distribution analysis of the most frequently scanned ports}
-% \label{fig:ports}
-% \end{figure}
+\subsection{Pattern Recognition}
+The overall scanning activity appears steady and persistent rather than bursty, as seen in \autoref{fig:time_series_plot}, which shows relatively consistent traffic across the capture period. This suggests automated scanning tools operating continuously. In terms of target selection, \autoref{fig:port_distribution_plot} reveals a strong preference for a small set of well-known ports (e.g., 22, 3389, 80 for TCP and 514, 53 for UDP), which indicates service-specific reconnaissance rather than broad-spectrum port sweeps. This pattern aligns with mass scanning campaigns that probe for vulnerable services while minimizing noise by targeting likely open ports.
 
-% \begin{figure}[H]
-% \centering
-% % \includegraphics[width=0.8\linewidth]{figures/scanner_scope.png}
-% \caption{Target diversity analysis for the most active scanning sources}
-% \label{fig:scope}
-% \end{figure}
-
-% \section{Security Analysis and Interpretation}
-% The observed scanning patterns reveal several concerning trends in internet-wide reconnaissance activities:
-
-% \paragraph{Automated Mass Scanning:} The concentration of traffic from a small number of sources, combined with the consistent targeting of specific ports, strongly indicates automated scanning tools rather than manual reconnaissance. This automation enables attackers to efficiently survey large address spaces for vulnerable services.
-
-% \paragraph{Service-Specific Targeting:} The port distribution shows attackers focusing on specific services including SSH (22), RDP (3389), SIP (5060), and various web services on non-standard ports. This targeted approach suggests attackers are searching for known vulnerable implementations or default configurations.
-
-% \paragraph{IoT and Infrastructure Focus:} Many targeted ports (8124, 34567, 37777) correspond to IoT devices, IP cameras, and embedded systems that often have poor security practices. The prevalence of these targets indicates ongoing campaigns to build IoT botnets.
-
-% \paragraph{DDoS Preparation:} The significant UDP scanning activity, particularly targeting DNS (53), NTP (123), and SIP (5060) services, suggests reconnaissance for potential DDoS amplification attacks. These protocols can generate large response packets, making them valuable for reflection attacks.
-
-% \paragraph{Persistence and Scale:} The steady traffic pattern over time, as shown in \autoref{fig:timeseries}, indicates continuous scanning operations rather than sporadic attacks. This persistence suggests well-resourced threat actors operating scanning infrastructure.
-
-% \section{Threat Assessment}
-% While network telescopes themselves face no direct risk from this traffic (being non-routable), the observed patterns indicate active threat reconnaissance that poses risks to legitimate internet infrastructure:
-
-% \begin{itemize}
-%     \item \textbf{High Risk:} The scale and persistence of scanning suggests professional threat actors
-%     \item \textbf{Botnet Activity:} Heavy hitters like 88.213.209.194 likely represent compromised hosts in larger botnets
-%     \item \textbf{Service Targeting:} Focus on specific ports indicates knowledge of vulnerable services and exploitation techniques
-%     \item \textbf{Amplification Potential:} UDP port targeting reveals preparation for large-scale DDoS attacks
-% \end{itemize}
-
-% Organizations should monitor for similar scanning patterns against their networks and ensure proper security controls are in place for the identified high-risk services.
+\subsection{Threat Assessment}
+Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This strongly suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. The scanner's behavior is highly consistent with that of a mass scanner or botnet-controlled agent performing service enumeration. Its origin from a cloud-hosting provider in the Netherlands further supports this. Such scanners pose risks by identifying open services for later exploitation, brute-force attacks, or malware delivery.
 
 \end{document}
 
