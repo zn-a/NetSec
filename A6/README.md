@@ -12,9 +12,11 @@ source .venv/bin/activate
 pip install dpkt matplotlib maxminddb-geolite2
 ```
 
-## Running the Scripts
+## Running the Scripts (On Linux)
 
-1. **Extract PCAPs**: unzip the PCAP archives from `assignment_files/` into the `pcaps/` directory (already done).
+To run the assignment scripts, follow these steps:
+
+1. **Extract PCAPs**: unzip the PCAP files from `assignment_files/` into the `pcaps/` directory (already done).
 2. **Activate the venv**:
 
    ```shell
@@ -28,7 +30,7 @@ pip install dpkt matplotlib maxminddb-geolite2
 - **Top Scanners**
 
   ```shell
-  python3 scripts/top_scanners.py         # 1m18s
+  python3 scripts/top_scanners.py         # Execution time: 1m18s (timed using Linux `time` command)
   ```
 
 - **Top Target Ports**
@@ -69,7 +71,7 @@ pip install dpkt matplotlib maxminddb-geolite2
   python3 scripts/visualization/scanner_scope.py      # 1m17s
   ```
 
-All scripts assume the PCAP files are located in `../pcaps` relative to this directory.
+All scripts assume the PCAP files are located in `../pcaps` relative to this directory (`A6/`).
 
 ## PDF Report
 
