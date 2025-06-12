@@ -12,12 +12,12 @@
 % Hyperref configuration with better colors and no boxes
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=darkred,
-    citecolor=darkred,
-    urlcolor=blue,
-    filecolor=darkred,
-    pdfborder={0 0 0},
+  colorlinks=true,
+  linkcolor=darkred,
+  citecolor=darkred,
+  urlcolor=blue,
+  filecolor=darkred,
+  pdfborder={0 0 0},
 }
 
 % Define custom colors
@@ -31,122 +31,115 @@
 \date{June 13, 2025}
 
 \begin{document}
-\maketitle 
-This report shows the results of analyzing network traffic from a telescope sensor. The goal is to find scanning behavior, top scanner IPs, and protocol use. The analysis was done using Python scripts on the provided PCAP files.
-
+\maketitle
+This assignment report presents an analysis of network traffic captured by a telescope sensor. The main goals are to spot scanning activity, find the top scanner IPs, and see which protocols are used most. The analysis was done using Python scripts on the provided PCAP files.
 
 \section{Top Scanners}
-\autoref{tab:scanners} shows the ten most active scanning sources by packet volume. These IPs generated over 9\% of total traffic, with 185.242.226.50 contributing 188,000+ packets, indicating automated scanning tools or botnet activity.
-
-
+\autoref{tab:scanners} shows the top 10 most active scanning sources by packet count. These IPs generated over 9\% of total traffic, with IP 185.242.226.50 contributing 188,000+ packets, which could indicate automated scanning tools or botnet activity.
 
 \begin{table}[H]
-\centering
-\begin{tabular}{@{}lrr@{}}
-\toprule
-\textbf{IP Address} & \textbf{Packets} & \textbf{Share} \\
-\midrule
-185.242.226.50 & 188,293 & 2.32\% \\
-185.242.226.46 & 105,263 & 1.30\% \\
-45.146.224.132 & 74,096 & 0.91\% \\
-10.14.176.3 & 72,407 & 0.89\% \\
-10.241.128.246 & 72,326 & 0.89\% \\
-80.75.212.37 & 59,683 & 0.74\% \\
-183.136.225.42 & 56,189 & 0.69\% \\
-212.70.149.138 & 54,256 & 0.67\% \\
-118.123.105.92 & 51,992 & 0.64\% \\
-218.92.0.99 & 49,420 & 0.61\% \\
-\bottomrule
-\end{tabular}
-\caption{Top 10 scanner IP addresses by packet count}
-\label{tab:scanners}
+  \centering
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    \textbf{IP Address} & \textbf{Packets} & \textbf{Share} \\
+    \midrule
+    185.242.226.50      & 188,293          & 2.32\%         \\
+    185.242.226.46      & 105,263          & 1.30\%         \\
+    45.146.224.132      & 74,096           & 0.91\%         \\
+    10.14.176.3         & 72,407           & 0.89\%         \\
+    10.241.128.246      & 72,326           & 0.89\%         \\
+    80.75.212.37        & 59,683           & 0.74\%         \\
+    183.136.225.42      & 56,189           & 0.69\%         \\
+    212.70.149.138      & 54,256           & 0.67\%         \\
+    118.123.105.92      & 51,992           & 0.64\%         \\
+    218.92.0.99         & 49,420           & 0.61\%         \\
+    \bottomrule
+  \end{tabular}
+  \caption{Top 10 scanner IP addresses by packet count}
+  \label{tab:scanners}
 \end{table}
-
 
 \section{Top Target Ports}
-\autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (e.g., 22, 80, 443), while UDP scanning targeted DNS, SIP, and network service discovery. These results reflect broad automated probing for known services.
+\autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (e.g., 22 (SSH), 3389 (RDP), 80 (HTTP)), while UDP scans primarily targeted infrastructure and communication services such as 514 (Syslog), 53 (DNS), and 5060 (SIP). This indicates that attackers are probing for both administrative access points and commonly exposed lightweight services.
 
 \begin{table}[H]
-\centering
-\begin{subtable}[t]{0.45\textwidth}
-\centering
-\begin{tabular}{@{}cr@{}}
-\toprule
-\textbf{Port} & \textbf{Packets} \\
-\midrule
-22    & 174,938 \\
-3389  & 101,839 \\
-80    & 90,764  \\
-8088  & 82,746  \\
-8080  & 80,344  \\
-8728  & 76,159  \\
-5555  & 69,330  \\
-443   & 53,354  \\
-8122  & 51,620  \\
-12103 & 50,686  \\
-\bottomrule
-\end{tabular}
-\caption{TCP Scans}
-\label{tab:tcp-ports}
-\end{subtable}
-\hfill
-\begin{subtable}[t]{0.45\textwidth}
-\centering
-\begin{tabular}{@{}cr@{}}
-\toprule
-\textbf{Port} & \textbf{Packets} \\
-\midrule
-514   & 144,733 \\
-53    & 91,129  \\
-5060  & 63,392  \\
-1194  & 40,973  \\
-32410 & 27,957  \\
-123   & 23,558  \\
-55001 & 13,926  \\
-1900  & 13,211  \\
-6881  & 13,009  \\
-5353  & 11,856  \\
-\bottomrule
-\end{tabular}
-\caption{UDP Scans}
-\label{tab:udp-ports}
-\end{subtable}
-\caption{Top 10 destination ports for TCP and UDP scans}
-\label{tab:ports}
+  \centering
+  \begin{subtable}[t]{0.45\textwidth}
+    \centering
+    \begin{tabular}{@{}cr@{}}
+      \toprule
+      \textbf{Port} & \textbf{Packets} \\
+      \midrule
+      22            & 174,938          \\
+      3389          & 101,839          \\
+      80            & 90,764           \\
+      8088          & 82,746           \\
+      8080          & 80,344           \\
+      8728          & 76,159           \\
+      5555          & 69,330           \\
+      443           & 53,354           \\
+      8122          & 51,620           \\
+      12103         & 50,686           \\
+      \bottomrule
+    \end{tabular}
+    \caption{TCP Scans}
+    \label{tab:tcp-ports}
+  \end{subtable}
+  \hfill
+  \begin{subtable}[t]{0.45\textwidth}
+    \centering
+    \begin{tabular}{@{}cr@{}}
+      \toprule
+      \textbf{Port} & \textbf{Packets} \\
+      \midrule
+      514           & 144,733          \\
+      53            & 91,129           \\
+      5060          & 63,392           \\
+      1194          & 40,973           \\
+      32410         & 27,957           \\
+      123           & 23,558           \\
+      55001         & 13,926           \\
+      1900          & 13,211           \\
+      6881          & 13,009           \\
+      5353          & 11,856           \\
+      \bottomrule
+    \end{tabular}
+    \caption{UDP Scans}
+    \label{tab:udp-ports}
+  \end{subtable}
+  \caption{Top 10 destination ports for TCP and UDP scans}
+  \label{tab:ports}
 \end{table}
 
-
 \section{Protocol Breakdown}
-\autoref{fig:protocol_breakdown} shows the protocol breakdown of the captured traffic. TCP dominates with 7,404,342 packets (91.4\%) versus UDP's 697,351 packets (8.6\%). This reflects typical scanning patterns targeting web and remote access services.
+\autoref{fig:protocol_breakdown} shows a pie chart of the protocol breakdown of the captured traffic. TCP dominates with 7,404,342 packets (91.4\%) versus UDP's 697,351 packets (8.6\%). This reflects typical scanning patterns targeting web and remote access services.
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.75\linewidth]{figures/protocol_breakdown.pdf}
-\caption{Protocol breakdown showing TCP vs UDP packet counts in the dataset}
-\label{fig:protocol_breakdown}
+  \centering
+  \includegraphics[width=0.75\linewidth]{figures/protocol_breakdown.pdf}
+  \caption{Protocol breakdown showing TCP vs UDP packet counts in the dataset}
+  \label{fig:protocol_breakdown}
 \end{figure}
 
 \section{Heavy Hitter Scanner}
-\autoref{tab:heavyhitter} shows the scanner with the highest number of packets. IP address \texttt{185.242.226.50} sent over 188,000 TCP SYN and UDP packets, targeting 49,853 unique IP addresses and 4 different ports. This indicates a broad scanning strategy, likely automated. The IP geolocates to the Netherlands (country code \texttt{NL}).
-
+\autoref{tab:heavyhitter} shows the scanner with the highest number of packets. IP address 185.242.226.50 sent over 188,000 TCP SYN and UDP packets, targeting 49,853 unique IP addresses and 4 different ports. This indicates a broad scanning strategy, likely automated. The IP geolocates to the Netherlands (country code NL).
 
 \begin{table}[H]
-\centering
-\begin{tabular}{@{}ll@{}}
-\toprule
-\textbf{Field} & \textbf{Value} \\
-\midrule
-Scanner IP       & 185.242.226.50 \\
-Number of packets          & 188,293 \\
-Number of destination IPs  & 49,853 \\
-Number of ports            & 4 \\
-Country          & NL \\
-\bottomrule
-\end{tabular}
-\caption{Profile of the heavy-hitter scanner}
-\label{tab:heavyhitter}
+  \centering
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Field}            & \textbf{Value} \\
+    \midrule
+    Scanner IP                & 185.242.226.50 \\
+    Number of packets         & 188,293        \\
+    Number of destination IPs & 49,853         \\
+    Number of ports           & 4              \\
+    Country                   & NL             \\
+    \bottomrule
+  \end{tabular}
+  \caption{Profile of the heavy-hitter scanner}
+  \label{tab:heavyhitter}
 \end{table}
-
 
 \section{Visualization}
 
@@ -154,34 +147,31 @@ Country          & NL \\
 \autoref{fig:time_series_plot} shows the number of scanning packets observed over time, grouped into 5-minute bins. The traffic starts at a peak of nearly 1.5 million packets and gradually decreases before showing a slight rise again near the end.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{figures/time_series.pdf}
-    \caption{Packet count over time in 5-minute intervals}
-    \label{fig:time_series_plot}
+  \centering
+  \includegraphics[width=\textwidth]{figures/time_series.pdf}
+  \caption{Packet count over time in 5-minute intervals}
+  \label{fig:time_series_plot}
 \end{figure}
-
 
 \subsection{Port Distribution}
 \autoref{fig:port_distribution_plot} shows the top 10 most scanned TCP and UDP destination ports. TCP scans target services such as SSH (22), RDP (3389), and HTTP(S), while UDP scans focus on DNS (53), syslog (514), SIP (5060), and NTP (123).
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/port_distribution.pdf}
-\caption{Top 10 scanned TCP and UDP ports}
-\label{fig:port_distribution_plot}
+  \centering
+  \includegraphics[width=\textwidth]{figures/port_distribution.pdf}
+  \caption{Top 10 scanned TCP and UDP ports}
+  \label{fig:port_distribution_plot}
 \end{figure}
- 
 
 \subsection{Scanner Scope}
 \autoref{fig:scanner_scope_plot} shows the number of unique destination IP addresses contacted by the top 10 scanner IPs. The most aggressive scanner contacted nearly 50,000 IPs.
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/scanner_scope.pdf}
-\caption{Number of unique IPs scanned by the top 10 scanners}
-\label{fig:scanner_scope_plot}
+  \centering
+  \includegraphics[width=\textwidth]{figures/scanner_scope.pdf}
+  \caption{Number of unique IPs scanned by the top 10 scanners}
+  \label{fig:scanner_scope_plot}
 \end{figure}
-
 
 \section{Interpretation and Reasoning}
 
@@ -192,4 +182,3 @@ The overall scanning activity appears steady and persistent rather than bursty, 
 Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This strongly suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. The scanner's behavior is highly consistent with that of a mass scanner or botnet-controlled agent performing service enumeration. Its origin from a cloud-hosting provider in the Netherlands further supports this. Such scanners pose risks by identifying open services for later exploitation, brute-force attacks, or malware delivery.
 
 \end{document}
-
