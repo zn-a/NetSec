@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from common import iter_packets
 import csv
 
+# count TCP and UDP packets
 counts = Counter()
 for ts, ip in iter_packets():
     if ip.p == dpkt.ip.IP_PROTO_TCP:
@@ -14,9 +15,12 @@ for ts, ip in iter_packets():
         if isinstance(ip.data, dpkt.udp.UDP):
             counts['UDP'] += 1
 
+# Get labels and values for the pie chart
 labels = list(counts.keys())
 values = [counts[l] for l in labels]
-plt.figure(figsize=(4,4))
+
+# Create a pie chart
+plt.figure(figsize=(4, 4))
 plt.pie(values, labels=labels, autopct='%1.1f%%')
 plt.title('Protocol Breakdown')
 plt.savefig('report/figures/protocol_breakdown.pdf')

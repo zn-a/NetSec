@@ -71,7 +71,7 @@ To run the assignment scripts, follow these steps:
   python3 scripts/visualization/scanner_scope.py      # 1m17s
   ```
 
-All scripts assume that the PCAP files are located in `../pcaps` relative to this directory (`A6/`). The tree structure of the project is thus as follows:
+All scripts assume that the PCAP files are located in `A6/pcaps`. The tree structure of the project is thus as follows:
 
 ```shell
 tree -L 2

@@ -4,6 +4,7 @@ from common import iter_packets, ip_to_str, GEOIP_READER
 from pathlib import Path
 import csv
 
+# Count the number of packets sent by each source IP
 counts = Counter()
 for ts, ip in iter_packets():
     if ip.p == dpkt.ip.IP_PROTO_TCP:
@@ -16,6 +17,7 @@ for ts, ip in iter_packets():
 
 scanner, packets = counts.most_common(1)[0]
 
+# Initialize sets for destination IPs and ports
 dest_ips = set()
 ports = set()
 for ts, ip in iter_packets():
@@ -31,6 +33,7 @@ for ts, ip in iter_packets():
         dest_ips.add(ip_to_str(ip.dst))
         ports.add(ip.data.dport)
 
+# Get geo information
 info = {'country': 'N/A'}
 if GEOIP_READER:
     geo = GEOIP_READER.get(scanner)
@@ -41,7 +44,7 @@ if GEOIP_READER:
 output_path = Path("output/heavy_hitter_scanner_output.csv")
 output_path.parent.mkdir(exist_ok=True)
 
-# Write to CSV
+# Save CSV output
 with open(output_path, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Field", "Value"])

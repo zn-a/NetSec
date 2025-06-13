@@ -23,7 +23,6 @@ for ts, ip in iter_packets():
 tcp_top = tcp_ports.most_common(10)
 udp_top = udp_ports.most_common(10)
 
-# Prepare data
 tcp_labels, tcp_counts = zip(*tcp_top)
 udp_labels, udp_counts = zip(*udp_top)
 

@@ -7,6 +7,7 @@ from common import iter_packets
 tcp_ports = Counter()
 udp_ports = Counter()
 
+# Count TCP and UDP destination ports
 for ts, ip in iter_packets():
     if ip.p == dpkt.ip.IP_PROTO_TCP:
         tcp = ip.data
@@ -17,11 +18,11 @@ for ts, ip in iter_packets():
         if isinstance(udp, dpkt.udp.UDP):
             udp_ports[udp.dport] += 1
 
-# Ensure output folder exists
+# Output setup
 output_path = Path("output/top_target_ports_output.csv")
 output_path.parent.mkdir(exist_ok=True)
 
-# Write combined CSV
+# Save CSV
 with open(output_path, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Port", "Protocol", "Packets"])
@@ -30,7 +31,7 @@ with open(output_path, "w", newline="") as f:
     for port, count in udp_ports.most_common(10):
         writer.writerow([port, "UDP", count])
 
-# Print formatted table to terminal
+# Print table to terminal
 print("\nTop 10 TCP Destination Ports")
 print(f"{'Port':<8}{'Packets':>10}")
 for port, count in tcp_ports.most_common(10):

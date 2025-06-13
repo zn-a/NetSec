@@ -9,6 +9,8 @@ from common import iter_packets
 
 bins = defaultdict(int)
 start = None
+
+# Count packets in 5-minute bins
 for ts, ip in iter_packets():
     if start is None:
         start = ts
@@ -22,6 +24,8 @@ for ts, ip in iter_packets():
 
 x = sorted(bins.keys())
 y = [bins[i] for i in x]
+
+# Plot setup
 plt.figure()
 plt.plot([i * 5 for i in x], y, marker='o')
 plt.xlabel('Minutes')
