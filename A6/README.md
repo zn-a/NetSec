@@ -1,9 +1,8 @@
 # Assignment 6: Network Telescope Analysis
 
-This folder contains the Python scripts used for Assignment 6 of CS4430 Network Security. A Python virtual environment `.venv` is used to manage
-dependencies.
+This folder contains the Python scripts used for Assignment 6 of CS4430 Network Security. A Python virtual environment `.venv` is used to manage dependencies.
 
-## Setup Instructions
+## Setup instructions
 
 ```shell
 # Create the virtual environment and install dependencies
@@ -12,20 +11,21 @@ source .venv/bin/activate
 pip install dpkt matplotlib maxminddb-geolite2
 ```
 
-## Running the Scripts (On Linux)
+## Running the scripts (on Linux)
 
 To run the assignment scripts, follow these steps:
 
-1. **Extract PCAPs**: unzip the PCAP files from `assignment_files/` into the `pcaps/` directory (already done).
+1. **Extract the PCAP assignment files**: unzip the PCAP files into the `pcaps/` directory (already done).
+
 2. **Activate the venv**:
 
    ```shell
    source .venv/bin/activate
    ```
 
-3. **Run the scripts (from root directory `A6/`)**.
+3. **Run the scripts (from the root directory `A6/`)**.
 
-### Data Analysis Scripts
+### Data analysis scripts
 
 - **Top Scanners**
 
@@ -51,7 +51,7 @@ To run the assignment scripts, follow these steps:
   python3 scripts/heavy_hitter_scanner.py # 2m24s
   ```
 
-### Visualization Scripts
+### Visualization scripts
 
 - **Time Series**
 
@@ -71,9 +71,68 @@ To run the assignment scripts, follow these steps:
   python3 scripts/visualization/scanner_scope.py      # 1m17s
   ```
 
-All scripts assume the PCAP files are located in `../pcaps` relative to this directory (`A6/`).
+All scripts assume that the PCAP files are located in `../pcaps` relative to this directory (`A6/`). The tree structure of the project is thus as follows:
 
-## PDF Report
+```shell
+tree -L 2
+```
+
+```shell
+.
+├── assignment_files
+│   ├── trace1_00000_20240222190416.zip
+│   ├── trace1_00001_20240222190651.zip
+│   ├── trace1_00002_20240222190931.zip
+│   ├── trace1_00003_20240222191206.zip
+│   ├── trace1_00004_20240222191515.zip
+│   ├── trace1_00005_20240222191820.zip
+│   ├── trace2_00000_20240222191916.zip
+│   ├── trace2_00001_20240222192217.zip
+│   ├── trace2_00002_20240222192517.zip
+│   ├── trace2_00003_20240222192816.zip
+│   ├── trace2_00004_20240222193117.zip
+│   └── trace2_00005_20240222193413.zip
+├── Network_Security_Assignment__Telescope_2025.pdf
+├── output
+│   ├── heavy_hitter_scanner_output.csv
+│   ├── protocol_breakdown_output.csv
+│   ├── top_scanners_output.csv
+│   └── top_target_ports_output.csv
+├── pcaps
+│   ├── trace1_00000_20240222190416
+│   ├── trace1_00001_20240222190651
+│   ├── trace1_00002_20240222190931
+│   ├── trace1_00003_20240222191206
+│   ├── trace1_00004_20240222191515
+│   ├── trace1_00005_20240222191820
+│   ├── trace2_00000_20240222191916
+│   ├── trace2_00001_20240222192217
+│   ├── trace2_00002_20240222192517
+│   ├── trace2_00003_20240222192816
+│   ├── trace2_00004_20240222193117
+│   └── trace2_00005_20240222193413
+├── README.md
+├── report
+│   ├── figures
+│   ├── report.aux
+│   ├── report.fdb_latexmk
+│   ├── report.fls
+│   ├── report.log
+│   ├── report.out
+│   ├── report.pdf
+│   ├── report.synctex.gz
+│   └── report.tex
+└── scripts
+    ├── common.py
+    ├── heavy_hitter_scanner.py
+    ├── protocol_breakdown.py
+    ├── __pycache__
+    ├── top_scanners.py
+    ├── top_target_ports.py
+    └── visualization
+```
+
+## PDF report
 
 The PDF report is compiled from LaTeX using the command:
 
