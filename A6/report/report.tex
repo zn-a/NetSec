@@ -180,6 +180,14 @@ Based on the data and the plots, \autoref{fig:port_distribution_plot} reveals th
 
 The overall scanning activity appears steady and persistent rather than bursty, as seen in \autoref{fig:time_series_plot}, which shows relatively consistent traffic across the capture period. This suggests automated scanning tools operating continuously.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/descriptive_visual1.pdf}
+  \caption{Port targeting by the top scanner IP}
+  \label{fig:port_targeting}
+\end{figure}
+
+
 \subsection{Threat Assessment}
 Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This definitely suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. Thus, this scanner exhibits mass scanner mass scanner characteristics. 
 

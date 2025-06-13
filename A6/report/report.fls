@@ -589,6 +589,11 @@ INPUT ./figures/scanner_scope.pdf
 INPUT figures/scanner_scope.pdf
 INPUT ./figures/scanner_scope.pdf
 INPUT ./figures/scanner_scope.pdf
+INPUT ./figures/descriptive_visual1.pdf
+INPUT ./figures/descriptive_visual1.pdf
+INPUT figures/descriptive_visual1.pdf
+INPUT ./figures/descriptive_visual1.pdf
+INPUT ./figures/descriptive_visual1.pdf
 INPUT report.aux
 INPUT ./report.out
 INPUT ./report.out
