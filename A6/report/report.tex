@@ -176,9 +176,13 @@ This assignment report presents an analysis of network traffic captured by a tel
 \section{Interpretation and Reasoning}
 
 \subsection{Pattern Recognition}
-The overall scanning activity appears steady and persistent rather than bursty, as seen in \autoref{fig:time_series_plot}, which shows relatively consistent traffic across the capture period. This suggests automated scanning tools operating continuously. In terms of target selection, \autoref{fig:port_distribution_plot} reveals a strong preference for a small set of well-known ports (e.g., 22, 3389, 80 for TCP and 514, 53 for UDP), which indicates service-specific reconnaissance rather than broad-spectrum port sweeps. This pattern aligns with mass scanning campaigns that probe for vulnerable services while minimizing noise by targeting likely open ports.
+Based on the data and the plots, \autoref{fig:port_distribution_plot} reveals that the scanners appear to be mainly targeting  well-known ports (such as 22, 3389, 80 for TCP and 514, 53 for UDP), which indicates service-specific reconnaissance rather than sweeping broad port ranges. Furthermore, IP 185.242.226.50 targeted nearly 50,000 unique IP addresses while only scanning four ports, which indicates a focused scanning strategy.
+
+The overall scanning activity appears steady and persistent rather than bursty, as seen in \autoref{fig:time_series_plot}, which shows relatively consistent traffic across the capture period. This suggests automated scanning tools operating continuously.
 
 \subsection{Threat Assessment}
-Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This strongly suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. The scanner's behavior is highly consistent with that of a mass scanner or botnet-controlled agent performing service enumeration. Its origin from a cloud-hosting provider in the Netherlands further supports this. Such scanners pose risks by identifying open services for later exploitation, brute-force attacks, or malware delivery.
+Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This definitely suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. Thus, this scanner exhibits mass scanner mass scanner characteristics. 
+
+Such scanners pose high risks by identifying open services for later exploitation, brute-force attacks, or malware delivery.
 
 \end{document}
