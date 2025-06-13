@@ -176,21 +176,27 @@ This assignment report presents an analysis of network traffic captured by a tel
 \section{Interpretation and Reasoning}
 
 \subsection{Pattern Recognition}
-Based on the data and the plots, \autoref{fig:port_distribution_plot} reveals that the scanners appear to be mainly targeting  well-known ports (such as 22, 3389, 80 for TCP and 514, 53 for UDP), which indicates service-specific reconnaissance rather than sweeping broad port ranges. Furthermore, IP 185.242.226.50 targeted nearly 50,000 unique IP addresses while only scanning four ports, which indicates a focused scanning strategy.
+Based on the data and the plots, \autoref{fig:port_distribution_plot} reveals that the scanners appear to be mainly targeting  well-known ports (such as 22, 3389, 80 for TCP and 514, 53 for UDP), which indicates service-specific reconnaissance rather than sweeping broad port ranges. Furthermore, IP 185.242.226.50 targeted nearly 50,000 unique IP addresses while only scanning four ports (\autoref{fig:descriptive_visual_1}), which indicates a focused scanning strategy.
 
 The overall scanning activity appears steady and persistent rather than bursty, as seen in \autoref{fig:time_series_plot}, which shows relatively consistent traffic across the capture period. This suggests automated scanning tools operating continuously.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{figures/descriptive_visual1.pdf}
+  \includegraphics[width=0.48\textwidth]{figures/heavy_hitter_ports_pie_chart.pdf}
   \caption{Port targeting by the top scanner IP}
-  \label{fig:port_targeting}
+  \label{fig:descriptive_visual_1}
 \end{figure}
 
-
 \subsection{Threat Assessment}
-Focusing on scanner 185.242.226.50, shown in \autoref{tab:heavyhitter}, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports. This definitely suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. Thus, this scanner exhibits mass scanner mass scanner characteristics. 
+Focusing on scanner 185.242.226.50, it sent over 188,000 packets to nearly 50,000 unique IP addresses while only targeting four ports (\autoref{fig:descriptive_visual_2}). This definitely suggests a horizontal scanning strategy, where a single service (e.g., SSH on port 22) is probed across a large address space. Thus, this scanner exhibits mass scanner mass scanner characteristics.
 
 Such scanners pose high risks by identifying open services for later exploitation, brute-force attacks, or malware delivery.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.48\textwidth]{figures/threat_assessment_barplot.pdf}
+  \caption{Heavy-hitter scanner activity: packets sent, IPs scanned, and ports targeted}
+  \label{fig:descriptive_visual_2}
+\end{figure}
 
 \end{document}
