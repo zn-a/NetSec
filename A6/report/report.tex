@@ -32,10 +32,10 @@
 
 \begin{document}
 \maketitle
-This assignment report presents an analysis of network traffic captured by a telescope sensor. The main goals are to spot scanning activity, find the top scanner IPs, and see which protocols are used most. The analysis was done using Python scripts on the provided PCAP files.
+This assignment report presents an analysis of network traffic captured by a telescope operating in a certain enterprise. The main goals are to spot scanning activity, find the top scanner IPs, and see which protocols are used most. The analysis was done using Python scripts on the provided PCAP files.
 
 \section{Top Scanners}
-\autoref{tab:scanners} shows the top 10 most active scanning sources by packet count. These IPs generated over 9\% of total traffic, with IP 185.242.226.50 contributing 188,000+ packets, which could indicate automated scanning tools or botnet activity.
+\autoref{tab:scanners} shows the top 10 most active scanning sources by packet count. These IPs generated over 9\% of the total traffic, with IP 185.242.226.50 scanning over 188,000 packets, which could indicate automated scanning tools or botnet activity.
 
 \begin{table}[H]
   \centering
@@ -60,7 +60,7 @@ This assignment report presents an analysis of network traffic captured by a tel
 \end{table}
 
 \section{Top Target Ports}
-\autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (e.g., 22 (SSH), 3389 (RDP), 80 (HTTP)), while UDP scans primarily targeted infrastructure and communication services such as 514 (Syslog), 53 (DNS), and 5060 (SIP). This indicates that attackers are probing for both administrative access points and commonly exposed lightweight services.
+\autoref{tab:ports} lists the top destination ports targeted by TCP and UDP scanners. Most TCP activity focused on ports commonly associated with remote access or web services (such as 22 (SSH), 3389 (RDP), 80 (HTTP)), while UDP scans primarily targeted infrastructure and communication services (such as 514 (Syslog), 53 (DNS), 5060 (SIP)). This indicates that the attackers are probing for both administrative access points and commonly exposed lightweight services.
 
 \begin{table}[H]
   \centering
@@ -122,7 +122,7 @@ This assignment report presents an analysis of network traffic captured by a tel
 \end{figure}
 
 \section{Heavy Hitter Scanner}
-\autoref{tab:heavyhitter} shows the scanner with the highest number of packets. IP address 185.242.226.50 sent over 188,000 TCP SYN and UDP packets, targeting 49,853 unique IP addresses and 4 different ports. This indicates a broad scanning strategy, likely automated. The IP geolocates to the Netherlands (country code NL).
+\autoref{tab:heavyhitter} shows the identified scanner with the highest number of packets, which is IP address 185.242.226.50 and it has sent over 188,000 TCP SYN and UDP packets, targeting 49,853 unique IP addresses and 4 different ports. This indicates a broad scanning strategy, likely automated. The IP geolocates to the Netherlands (country code NL).
 
 \begin{table}[H]
   \centering
@@ -154,7 +154,7 @@ This assignment report presents an analysis of network traffic captured by a tel
 \end{figure}
 
 \subsection{Port Distribution}
-\autoref{fig:port_distribution_plot} shows the top 10 most scanned TCP and UDP destination ports. TCP scans target services such as SSH (22), RDP (3389), and HTTP(S), while UDP scans focus on DNS (53), syslog (514), SIP (5060), and NTP (123).
+\autoref{fig:port_distribution_plot} shows the top 10 most scanned TCP and UDP destination ports. TCP scans target services such as SSH (22), RDP (3389), and HTTP (80), while UDP scans focus on Syslog (514), DNS (53), and SIP (5060).
 
 \begin{figure}[H]
   \centering
@@ -164,7 +164,7 @@ This assignment report presents an analysis of network traffic captured by a tel
 \end{figure}
 
 \subsection{Scanner Scope}
-\autoref{fig:scanner_scope_plot} shows the number of unique destination IP addresses contacted by the top 10 scanner IPs. The most aggressive scanner contacted nearly 50,000 IPs.
+\autoref{fig:scanner_scope_plot} shows the number of unique destination IP addresses scanned by the top 10 scanner IPs. The most aggressive scanner scanned nearly 50,000 IPs.
 
 \begin{figure}[H]
   \centering
