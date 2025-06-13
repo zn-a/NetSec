@@ -8,7 +8,7 @@ This folder contains the Python scripts used for Assignment 6 of CS4430 Network 
 # Create the virtual environment and install dependencies
 python3 -m venv .venv
 source .venv/bin/activate
-pip install dpkt matplotlib maxminddb-geolite2
+pip install dpkt matplotlib maxminddb-geolite2 pathlib
 ```
 
 ## Running the scripts (on Linux)
