@@ -15,7 +15,14 @@ pip install dpkt matplotlib maxminddb-geolite2 pathlib
 
 To run the assignment scripts, follow these steps:
 
-1. **Extract the PCAP assignment files**: unzip the PCAP files into the `pcaps/` directory (already done).
+1. **Extract the PCAP assignment files**: unzip all the PCAP files into the `pcaps/` directory.
+
+   - Due to WebLab upload size limit, the files are not included in `pcaps/` directory, but they can be extracted from `assignment_files/` into `pcaps/` using:
+
+     ```shell
+     find assignment_files -name "*.zip" -exec unzip -o {} -d pcaps/ \;
+     rm -rf pcaps/__MACOSX
+     ```
 
 2. **Activate the venv**:
 
