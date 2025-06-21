@@ -1,0 +1,495 @@
+--------------------------------------------------
+o")~   Snort++ 3.0.0-267
+--------------------------------------------------
+Loading /home/snorty/snort3/etc/snort/snort.lua:
+Loading snort_defaults.lua:
+Finished snort_defaults.lua:
+Loading file_magic.lua:
+Finished file_magic.lua:
+	ssh
+	host_cache
+	pop
+	binder
+	stream_tcp
+	network
+	gtp_inspect
+	packets
+	dce_http_proxy
+	stream_icmp
+	normalizer
+	ftp_server
+	stream_udp
+	search_engine
+	ips
+	dce_smb
+	wizard
+	appid
+	file_id
+	ftp_data
+	hosts
+	smtp
+	port_scan
+	dce_http_server
+	modbus
+	dce_tcp
+	telnet
+	host_tracker
+	ssl
+	sip
+	rpc_decode
+	http2_inspect
+	http_inspect
+	back_orifice
+	stream_user
+	stream_ip
+	classifications
+	dnp3
+	active
+	ftp_client
+	daq
+	decode
+	alerts
+	stream
+	references
+	arp_spoof
+	output
+	dns
+	dce_udp
+	imap
+	process
+	stream_file
+Finished /home/snorty/snort3/etc/snort/snort.lua:
+Loading rule args:
+Loading /home/snorty/snort3/etc/rules/snort3-community.rules:
+Finished /home/snorty/snort3/etc/rules/snort3-community.rules:
+Finished rule args:
+--------------------------------------------------
+rule counts
+       total rules loaded: 829
+               text rules: 829
+            option chains: 829
+            chain headers: 46
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any      63       3       0       0
+     src     124       3       0       0
+     dst     539      98       0       0
+    both       0       1       0       0
+   total     726     105       0       0
+--------------------------------------------------
+flowbits
+                  defined: 20
+              not checked: 11
+                  not set: 3
+--------------------------------------------------
+service rule counts          to-srv  to-cli
+                      dns:       89       2
+                      ftp:        7       2
+                 ftp-data:        0       8
+                     http:      489      92
+                     imap:        0       8
+                      irc:        4       1
+              netbios-ssn:       15       1
+                     pop3:        0       8
+                     smtp:       16       0
+                      ssl:       14      31
+                   telnet:        1       0
+                    total:      635     153
+--------------------------------------------------
+fast pattern port groups        src     dst     any
+                   packet:       12      24       2
+--------------------------------------------------
+fast pattern service groups  to-srv  to-cli
+                   packet:        8       6
+                      key:        1       0
+                   header:        1       4
+                     body:        1       0
+                     file:        2       4
+--------------------------------------------------
+search engine
+                instances: 62
+                 patterns: 1135
+            pattern chars: 23237
+               num states: 18286
+         num match states: 1117
+             memory scale: KB
+             total memory: 532.265
+           pattern memory: 66.9678
+        match list memory: 182.859
+        transition memory: 274.688
+--------------------------------------------------
+pcap DAQ configured to read-file.
+Commencing packet processing
+++ [0] merged.pcapng
+03/24-17:26:42.384523 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 206.189.208.236:60920 -> 10.22.11.166:1177
+03/24-17:27:35.296810 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 192.34.56.46:33962 -> 10.27.54.147:1177
+03/24-17:27:50.335729 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 192.241.130.45:58624 -> 10.160.214.175:1177
+03/24-17:28:56.489450 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.120.242:48196 -> 10.248.188.116:1177
+03/24-17:29:23.050648 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 69.164.193.106:52794 -> 10.189.196.239:1177
+03/24-17:29:25.857330 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.199.120.199:58580 -> 10.251.199.132:1177
+03/24-17:29:27.090474 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.255.230.31:40558 -> 10.217.227.152:1177
+03/24-17:29:48.517478 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 157.245.184.93:43596 -> 10.119.13.77:1177
+03/24-17:29:01.757848 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.240.205.34:54164 -> 10.217.227.152:443
+03/24-17:30:05.499720 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 157.230.62.181:56394 -> 10.54.166.177:1177
+03/24-17:30:11.594678 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.68.16.179:39798 -> 10.214.47.216:1177
+03/24-17:30:38.653843 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 172.104.25.59:60202 -> 10.52.62.219:1177
+03/24-17:30:57.886480 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.252.22:35664 -> 10.211.241.225:1177
+03/24-17:30:58.233437 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 142.93.31.207:59776 -> 10.91.123.140:1177
+03/24-17:31:21.093061 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 192.241.149.11:60354 -> 10.47.157.64:1177
+03/24-17:31:29.697307 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.232.56.24:56308 -> 10.208.87.81:1177
+03/24-17:31:43.958024 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 178.128.79.206:56452 -> 10.130.211.224:1177
+03/24-17:31:50.250152 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 23.239.26.164:45028 -> 10.190.198.102:1177
+03/24-17:31:51.681798 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.230.137.196:59966 -> 10.2.135.94:1177
+03/24-17:32:01.085983 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.42.35:47424 -> 10.59.121.114:1177
+03/24-17:32:16.996772 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 50.116.4.123:44246 -> 10.128.91.162:1177
+03/24-17:32:32.913622 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 143.110.192.209:56122 -> 10.116.254.48:1177
+03/24-17:32:44.214647 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.216.24:58626 -> 10.81.200.220:1177
+03/24-17:32:47.921478 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.58.115.86:35142 -> 10.106.24.25:1177
+03/24-17:33:05.898706 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.230.138.205:33136 -> 10.88.26.192:1177
+03/24-17:33:11.515688 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 68.183.118.111:36678 -> 10.150.218.141:1177
+03/24-17:33:21.084564 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.22.143.81:43262 -> 10.69.146.146:1177
+03/24-17:33:27.043569 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 147.182.129.2:50258 -> 10.26.135.217:1177
+03/24-17:33:44.716881 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 68.183.129.144:46086 -> 10.208.226.212:1177
+03/24-17:33:46.093206 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.223.128:56970 -> 10.100.187.68:1177
+03/24-17:34:53.999906 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 137.184.20.56:51938 -> 10.49.223.51:1177
+03/24-17:35:00.572427 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.183.178:60624 -> 10.183.124.156:1177
+03/24-17:35:18.522478 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.56.115.247:59050 -> 10.97.33.211:1177
+03/24-17:35:24.184861 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 206.189.193.14:56176 -> 10.30.139.190:1177
+03/24-17:35:40.075429 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 72.14.191.136:54408 -> 10.30.211.2:1177
+03/24-17:35:48.888459 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.216.252:52446 -> 10.25.11.186:1177
+03/24-17:35:52.450251 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.63.215:41738 -> 10.198.70.209:1177
+03/24-17:35:56.493660 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 50.116.17.117:60662 -> 10.111.186.210:1177
+03/24-17:36:00.923765 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.114.218:47744 -> 10.205.102.146:1177
+03/24-17:36:00.956806 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.43.165:36628 -> 10.197.204.228:1177
+03/24-17:36:07.959222 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.96.63:37300 -> 10.128.9.41:1177
+03/24-17:36:19.081146 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 143.110.136.37:52550 -> 10.145.79.213:1177
+03/24-17:36:35.830017 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.56.17:47514 -> 10.238.31.198:1177
+03/24-17:36:42.714620 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.114.154:48056 -> 10.213.254.63:1177
+03/24-17:37:28.468141 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.227.20.63:45240 -> 10.57.176.212:1177
+03/24-17:37:44.215419 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.199.122.233:43982 -> 10.140.194.131:1177
+03/24-17:37:55.597079 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 143.110.200.10:50268 -> 10.2.84.171:1177
+03/24-17:38:02.175008 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.74.53.39:53306 -> 10.212.114.69:1177
+03/24-17:38:09.299559 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.199.120.199:48676 -> 10.13.170.111:1177
+03/24-17:38:52.454326 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.215.55:47282 -> 10.1.136.12:1177
+03/24-17:38:58.689978 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.115.41:34284 -> 10.242.15.217:1177
+03/24-17:39:00.520370 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.68.47.240:56006 -> 10.65.75.88:1177
+03/24-17:39:03.217457 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.56.75.234:42570 -> 10.116.93.199:1177
+03/24-17:39:13.315819 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 147.182.190.84:49742 -> 10.156.237.127:1177
+03/24-17:39:16.471034 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.56.75.36:51876 -> 10.140.36.202:1177
+03/24-17:39:27.306077 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 74.207.228.182:54142 -> 10.105.155.155:1177
+03/24-17:39:55.361411 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 64.227.56.25:47554 -> 10.55.177.170:1177
+03/24-17:40:27.171839 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 167.172.153.116:35410 -> 10.124.70.58:1177
+03/24-17:40:41.880151 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.43.213:46848 -> 10.220.8.86:1177
+03/24-17:40:42.170286 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 74.207.244.100:60744 -> 10.31.253.251:1177
+03/24-17:40:45.596850 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 206.189.79.146:55620 -> 10.106.81.137:1177
+03/24-17:40:57.588370 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 64.227.80.167:47476 -> 10.109.153.122:1177
+03/24-17:41:01.938550 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.230.142.68:55184 -> 10.99.55.126:1177
+03/24-17:41:18.009265 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.58.120.156:36660 -> 10.149.47.227:1177
+03/24-17:41:19.001512 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 167.71.112.207:53456 -> 10.210.80.105:1177
+03/24-17:41:30.820658 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 157.230.175.147:42532 -> 10.94.22.184:1177
+03/24-17:41:30.967637 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 198.58.115.86:47260 -> 10.235.165.130:1177
+03/24-17:41:40.069538 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 104.248.79.201:50242 -> 10.232.227.206:1177
+03/24-17:41:48.853120 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.230.139.171:40380 -> 10.240.32.174:1177
+03/24-17:41:49.082724 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.7.170:50456 -> 10.233.10.163:1177
+03/24-17:42:05.372174 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 143.110.200.10:36568 -> 10.242.224.39:1177
+03/24-17:42:18.444010 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 159.65.111.44:56998 -> 10.215.74.149:1177
+03/24-17:42:20.104436 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 159.65.72.191:59964 -> 10.244.231.243:1177
+03/24-17:42:22.999180 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.43.23:36026 -> 10.108.85.234:1177
+03/24-17:42:28.771583 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.223.81:41238 -> 10.20.147.151:1177
+03/24-17:42:31.466689 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 157.245.168.250:35744 -> 10.22.69.113:1177
+03/24-17:42:43.871771 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 147.182.142.178:50356 -> 10.251.145.51:1177
+03/24-17:42:46.874417 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.80.206:33508 -> 10.17.59.170:1177
+03/24-17:42:59.129483 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.227.20.3:52934 -> 10.188.38.71:1177
+03/24-17:43:16.490415 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.114.197:53094 -> 10.2.124.228:1177
+03/24-17:43:24.741469 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 137.184.48.201:50258 -> 10.227.254.12:1177
+03/24-17:43:25.440126 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 167.99.175.197:37218 -> 10.57.63.116:1177
+03/24-17:43:41.714554 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.141.248:38346 -> 10.203.71.28:1177
+03/24-17:44:17.292357 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 192.155.81.46:56326 -> 10.221.239.3:1177
+03/24-17:44:42.457541 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 143.110.136.37:51278 -> 10.143.54.200:1177
+03/24-17:45:19.634972 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.255.206.80:52036 -> 10.19.45.69:1177
+03/24-17:45:26.161897 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.25.160:37484 -> 10.192.19.215:1177
+03/24-17:45:33.169122 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.197.196.18:40760 -> 10.137.83.206:1177
+03/24-17:45:49.091145 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.208.133:41566 -> 10.195.246.136:1177
+03/24-17:45:50.085148 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.197.196.8:54604 -> 10.2.103.212:1177
+03/24-17:46:17.912209 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.68.31.53:59862 -> 10.191.249.60:1177
+03/24-17:46:27.869152 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 159.203.185.142:42426 -> 10.143.72.91:1177
+03/24-17:46:30.369539 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 167.172.145.255:49642 -> 10.110.48.209:1177
+03/24-17:46:32.670983 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 138.68.31.53:59068 -> 10.244.167.206:1177
+03/24-17:46:52.405222 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 68.183.24.212:57362 -> 10.59.202.233:1177
+03/24-17:46:57.297319 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 137.184.193.104:56302 -> 10.162.48.7:1177
+03/24-17:47:04.965049 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 178.128.79.247:41820 -> 10.63.115.0:1177
+03/24-17:47:12.167566 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.169.94:44448 -> 10.182.248.37:1177
+03/24-17:47:12.953908 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 170.187.203.33:58278 -> 10.4.36.196:1177
+03/24-17:47:18.280706 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 69.164.209.74:50316 -> 10.76.123.195:1177
+03/24-17:47:19.095742 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 137.184.72.229:57856 -> 10.89.233.144:1177
+03/24-16:46:30.666684 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.240.205.34:37704 -> 10.106.24.25:80
+03/24-17:47:32.426151 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.255.206.101:52504 -> 10.12.26.80:1177
+03/24-17:47:33.742441 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 170.187.156.60:46848 -> 10.98.3.148:1177
+03/24-17:47:42.805056 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 67.207.84.219:40780 -> 10.242.195.196:1177
+03/24-17:47:54.118669 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.22.159.85:35182 -> 10.79.69.160:1177
+03/24-17:48:14.089207 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 192.34.56.46:49184 -> 10.147.77.225:1177
+03/24-17:48:39.799832 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 159.89.52.181:34536 -> 10.205.109.239:1177
+03/24-17:48:45.430112 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.208.6:53214 -> 10.189.28.130:1177
+03/24-17:48:57.829586 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.33.113.42:37070 -> 10.9.128.163:1177
+03/24-17:49:13.957050 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 146.190.72.228:56050 -> 10.7.190.86:1177
+03/24-17:49:19.476948 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 68.183.126.120:36236 -> 10.113.232.174:1177
+03/24-17:49:19.836320 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.175.208.6:54576 -> 10.41.72.74:1177
+03/24-17:49:23.282644 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.252.22:41932 -> 10.29.202.8:1177
+03/24-17:49:25.130813 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 45.79.82.54:50922 -> 10.2.204.221:1177
+03/24-17:49:32.385819 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 157.245.168.250:36260 -> 10.214.91.65:1177
+03/24-17:49:45.197518 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 72.14.191.62:36768 -> 10.111.97.38:1177
+03/24-17:49:56.887368 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.228.45.210:54988 -> 10.83.183.147:1177
+03/24-17:50:11.977666 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 134.209.63.180:55594 -> 10.35.193.121:1177
+03/24-17:50:17.330942 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.255.245.132:53518 -> 10.52.37.71:1177
+03/24-17:50:19.403667 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 147.182.190.84:49110 -> 10.63.151.113:1177
+03/24-17:50:19.629424 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 134.209.15.125:57758 -> 10.67.12.100:1177
+03/24-17:50:25.945186 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 50.116.42.169:34298 -> 10.75.32.198:1177
+03/24-17:50:36.204928 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 206.189.177.249:58490 -> 10.244.188.20:1177
+03/24-17:50:37.531834 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 178.128.152.80:58640 -> 10.56.104.33:1177
+03/24-17:50:38.305781 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 165.232.48.5:45040 -> 10.22.146.183:1177
+03/24-17:51:24.298000 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 72.14.191.126:41294 -> 10.169.238.28:1177
+03/24-17:51:31.583400 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 173.230.147.207:36886 -> 10.66.49.220:1177
+03/24-17:52:16.383932 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 206.189.193.14:49910 -> 10.139.206.20:1177
+03/24-17:07:56.094139 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.240.205.34:37956 -> 10.242.15.217:443
+03/24-17:47:54.680078 [**] [1:27964:5] "MALWARE-CNC Win.Trojan.Gh0st variant outbound connection" [**] [Classification: A Network Trojan was detected] [Priority: 1] {TCP} 66.240.205.34:49852 -> 10.130.211.224:443
+-- [0] merged.pcapng
+--------------------------------------------------
+Packet Statistics
+--------------------------------------------------
+daq
+                    pcaps: 1
+                 received: 7879519
+                 analyzed: 7879519
+                    allow: 7879519
+                 rx_bytes: 480938654
+           expected_flows: 51
+--------------------------------------------------
+codec
+                    total: 7879519     	(100.000%)
+                 discards: 235         	(  0.003%)
+                      eth: 7879519     	(100.000%)
+                      gre: 3           	(  0.000%)
+                    icmp4: 135345      	(  1.718%)
+                 icmp4_ip: 45039       	(  0.572%)
+                    icmp6: 3           	(  0.000%)
+                     ipv4: 7879522     	(100.000%)
+                     ipv6: 20          	(  0.000%)
+             ipv6_no_next: 17          	(  0.000%)
+                      tcp: 7684639     	( 97.527%)
+                   teredo: 17          	(  0.000%)
+             trans_bridge: 3           	(  0.000%)
+                      udp: 59317       	(  0.753%)
+--------------------------------------------------
+Module Statistics
+--------------------------------------------------
+appid
+                  packets: 7879304
+        processed_packets: 7700159
+          ignored_packets: 179145
+           total_sessions: 908766
+            appid_unknown: 20034
+       service_cache_adds: 176097
+    service_cache_removes: 169199
+--------------------------------------------------
+back_orifice
+                  packets: 39059
+--------------------------------------------------
+binder
+                  packets: 884348
+                 inspects: 884348
+--------------------------------------------------
+dce_smb
+                   events: 468
+                 sessions: 1313
+                  packets: 1165
+            ignored_bytes: 77666
+ max_outstanding_requests: 2
+  max_concurrent_sessions: 111
+--------------------------------------------------
+dce_tcp
+                     pdus: 84
+                    binds: 84
+             tcp_sessions: 84
+              tcp_packets: 84
+  max_concurrent_sessions: 25
+--------------------------------------------------
+detection
+                 analyzed: 7879519
+             raw_searches: 88267
+          cooked_searches: 355530
+             pkt_searches: 443797
+             key_searches: 61713
+          header_searches: 58500
+            body_searches: 340
+             total_alerts: 131
+                   logged: 131
+--------------------------------------------------
+dnp3
+            total_packets: 48179
+                 tcp_pdus: 48135
+  max_concurrent_sessions: 32
+--------------------------------------------------
+dns
+                  packets: 1406
+                 requests: 945
+  max_concurrent_sessions: 2
+--------------------------------------------------
+file_id
+              total_files: 340
+          total_file_data: 81202
+--------------------------------------------------
+http2_inspect
+      concurrent_sessions: 28
+  max_concurrent_sessions: 94
+--------------------------------------------------
+http_inspect
+                    flows: 63309
+                    scans: 126417
+              reassembles: 124365
+              inspections: 124311
+                 requests: 61375
+             get_requests: 51342
+            head_requests: 557
+            post_requests: 587
+         connect_requests: 8889
+           request_bodies: 346
+       uri_normalizations: 1272
+                 uri_path: 27
+               uri_coding: 689
+  max_concurrent_sessions: 11058
+--------------------------------------------------
+modbus
+                 sessions: 139
+                   frames: 233
+  max_concurrent_sessions: 31
+--------------------------------------------------
+normalizer
+     test_tcp_syn_options: 63799
+         test_tcp_options: 430073
+         test_tcp_padding: 4
+         test_tcp_req_urg: 7
+         test_tcp_req_pay: 474
+        test_tcp_trim_syn: 8
+        test_tcp_trim_win: 5381
+           test_tcp_block: 45020
+--------------------------------------------------
+port_scan
+                  packets: 7879304
+--------------------------------------------------
+search_engine
+               max_queued: 3
+            total_flushed: 13394
+            total_inserts: 13394
+             total_unique: 13394
+     non_qualified_events: 13263
+         qualified_events: 131
+           searched_bytes: 43412499
+--------------------------------------------------
+sip
+                  packets: 574
+                 sessions: 574
+  max_concurrent_sessions: 406
+                  dialogs: 385
+           total_requests: 385
+                   invite: 381
+                 register: 4
+--------------------------------------------------
+smtp
+                  packets: 572
+  max_concurrent_sessions: 8
+--------------------------------------------------
+ssh
+                  packets: 26073
+  max_concurrent_sessions: 1
+--------------------------------------------------
+ssl
+                  packets: 47176
+                  decoded: 47176
+             client_hello: 46802
+     unrecognized_records: 374
+  max_concurrent_sessions: 7950
+--------------------------------------------------
+stream
+                    flows: 884348
+             total_prunes: 494217
+              idle_prunes: 494217
+           expected_flows: 51
+--------------------------------------------------
+stream_icmp
+                 sessions: 19529
+                      max: 19529
+                  created: 19529
+                 released: 19529
+--------------------------------------------------
+stream_ip
+                 sessions: 6
+                      max: 6
+                  created: 6
+                 released: 8
+                 timeouts: 2
+--------------------------------------------------
+stream_tcp
+                 sessions: 836358
+                      max: 836358
+                  created: 836358
+                 released: 629543
+                 timeouts: 194655
+             instantiated: 200328
+                   setups: 836358
+                 restarts: 138753
+                   resyns: 12174
+                 discards: 27738
+                   events: 40383
+             syn_trackers: 432714
+         syn_ack_trackers: 188096
+       three_way_trackers: 12
+            data_trackers: 20895
+              segs_queued: 396877
+            segs_released: 396877
+                segs_used: 336107
+          rebuilt_packets: 471809
+          rebuilt_buffers: 102
+            rebuilt_bytes: 36476076
+                     gaps: 1391
+          client_cleanups: 15866
+          server_cleanups: 186429
+             initializing: 12174
+              established: 100
+                  closing: 2412
+                     syns: 447246
+                 syn_acks: 613569
+                   resets: 1506921
+                     fins: 1116204
+--------------------------------------------------
+stream_udp
+                 sessions: 28455
+                      max: 28455
+                  created: 40351
+                 released: 40351
+                 timeouts: 11896
+--------------------------------------------------
+telnet
+            total_packets: 523
+  max_concurrent_sessions: 1
+--------------------------------------------------
+wizard
+                tcp_scans: 371637
+                 tcp_hits: 138781
+                udp_scans: 58615
+                 udp_hits: 498
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Flows      Clients    Users      Payloads   Misc       Incompat.  Failed    
+                  unknown: 58046      25432      0          0          0          0          0         
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+timing
+                  runtime: 00:01:23
+                  seconds: 83.446590
+                  packets: 7879519
+                 pkts/sec: 94933
+o")~   Snort exiting

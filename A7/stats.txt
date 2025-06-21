@@ -1,0 +1,50 @@
+       three_way_trackers: 12
+            data_trackers: 20895
+              segs_queued: 396877
+            segs_released: 396877
+                segs_used: 336107
+          rebuilt_packets: 471809
+          rebuilt_buffers: 102
+            rebuilt_bytes: 36476076
+                     gaps: 1391
+          client_cleanups: 15866
+          server_cleanups: 186429
+             initializing: 12174
+              established: 100
+                  closing: 2412
+                     syns: 447246
+                 syn_acks: 613569
+                   resets: 1506921
+                     fins: 1116204
+--------------------------------------------------
+stream_udp
+                 sessions: 28455
+                      max: 28455
+                  created: 40351
+                 released: 40351
+                 timeouts: 11896
+--------------------------------------------------
+telnet
+            total_packets: 523
+  max_concurrent_sessions: 1
+--------------------------------------------------
+wizard
+                tcp_scans: 371637
+                 tcp_hits: 138781
+                udp_scans: 58615
+                 udp_hits: 498
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Flows      Clients    Users      Payloads   Misc       Incompat.  Failed    
+                  unknown: 58046      25432      0          0          0          0          0         
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+timing
+                  runtime: 00:01:16
+                  seconds: 76.452638
+                  packets: 7879519
+                 pkts/sec: 103677
+o")~   Snort exiting
